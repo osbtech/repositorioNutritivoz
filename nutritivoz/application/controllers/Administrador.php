@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of Administrador juan pablo CHUPON
+ * Description of Administrador
  *
  * @author Juan Pablo
  */
