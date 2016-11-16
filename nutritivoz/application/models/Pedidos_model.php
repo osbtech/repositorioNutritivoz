@@ -133,4 +133,13 @@ class Pedidos_model extends CI_Model {
         $this->db->simple_query("UPDATE NUT_PEDIDOS SET idCliente='" . $idcliente . "', estado='" . $estado . "', fecha_realizacion='" . $fechaRealizacion . "', fecha_entrega_estimada='" . $fechaEntregaEstimada . "', fecha_entrega='" . $fechaEntrega . "', nota_postventa = '" . $notaPostVenta . "', zona ='" . $zona . "', direccion='" . $direccion . "', direccion_aclaracion='" . $aclaracionDir . "', nota_cliente='" . $notaCliente . "',subtotal='" . $subtotal . "', costo_envio='" . $costoEnvio . "', total='" . $total . "', esquina1='" . $esquina1 . "',esquina2='" . $esquina2 . "' WHERE idPedido='" . $idPedido . "'");
     }
 
+    public function quitarProductoPedidos($idProducto) {
+        $query = $this->db->query("SELECT d.idPedidoDetalle,d.idPedido  FROM nut_pedidos p,nut_pedidos_detalle d WHERE d.idProducto = '" . $idProducto . "' AND p.idPedido=d.idPedido AND p.estado='INICIADO'");
+        $res = $query->result_array();       
+        foreach ($res as $r){
+            $this->db->simple_query("UPDATE NUT_PEDIDOS_DETALLE SET cantidad_entregada='0',cantidad_proveedor='0' WHERE idPedidoDetalle='".$r['idPedidoDetalle']."' ");
+        }
+        return $res;
+    }
+
 }

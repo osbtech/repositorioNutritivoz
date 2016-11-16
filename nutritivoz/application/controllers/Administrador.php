@@ -134,7 +134,7 @@ class Administrador extends CI_Controller {
             $datosEmail['zona'] = $pedido['zona'];
             //$datosEmail['horario'] = $pedido['aclaracion'];
             $datosEmail['celular'] = $pedido['celular'];
-            $datosEmail['subtotal'] =$pedido['subtotal'];
+            $datosEmail['subtotal'] = $pedido['subtotal'];
             $datosEmail['envio'] = $pedido['costo_envio'];
             $datosEmail['total'] = $pedido['total'];
             $datosEmail['notas'] = $pedido['nota'];
@@ -205,8 +205,23 @@ class Administrador extends CI_Controller {
         }
     }
 
-    public function quitar_prod_pedido($idProducto) {
-        
+    public function quitar_prod_pedido() {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('idProducto', 'Producto', 'required');
+        $data['productos'] = $this->productos_model->get_productos();
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('includes_admin/head');
+            $this->load->view('includes_admin/header');
+            $this->load->view('administrador/quitar_producto', $data);
+            $this->load->view('includes_admin/footer');
+        } else {
+            $data['resultado'] = $this->pedidos_model->quitarProductoPedidos($this->input->post('idProducto'));
+            $this->load->view('includes_admin/head');
+            $this->load->view('includes_admin/header');
+            $this->load->view('administrador/quitar_producto', $data);
+            $this->load->view('includes_admin/footer');
+        }
     }
 
 }

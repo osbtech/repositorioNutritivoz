@@ -58,7 +58,8 @@
                         </a>                      
                         <ul>
                             <li><a href="<?= base_url_control(); ?>administrador/listado_pedidos">Listado de pedidos</a></li>
-                            <li><a href="#">Reportes</a></li>
+                            <li><a href="<?= base_url_control(); ?>administrador/quitar_prod_pedido">Quitar Productos</a></li>
+                            
                         </ul>
                     </li>
                 </ul>
