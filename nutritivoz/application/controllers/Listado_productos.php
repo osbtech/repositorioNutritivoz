@@ -75,7 +75,7 @@ class Listado_productos extends CI_Controller {
             $datosEmail['esquina1'] = $this->input->post('esquina1');
             $datosEmail['esquina2'] = $this->input->post('esquina2');
             foreach ($this->cart->contents() as $items) {
-                $this->pedidos_model->guardarDetallePedido($idPedido, $items['id'], $items['qty'], ($items['price'] * $items['qty']));
+                $this->pedidos_model->guardarDetallePedido($idPedido, $items['id'], $items['qty'], ($items['price'] * $items['qty']),$items['qty'],$items['qty']);
                 $producto = $this->productos_model->get_productos($items['id']);
                 $marca = $this->productos_model->get_marcas($producto['idMarca']);
                 $carroItem['unidad'] = $producto['unidad'];

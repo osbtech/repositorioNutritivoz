@@ -77,7 +77,7 @@ class Pedidos_model extends CI_Model {
     }
 
     public function getPedidos($idPedido = false) {
-        $sql = 'SELECT idPedido,c.idCliente, c.correo,c.nombre,c.celular,p.direccion_aclaracion aclaracion,p.nota_cliente nota,p.idPedido,p.fecha_realizacion,p.zona,p.direccion,p.subtotal,p.costo_envio,p.total,p.esquina1,p.esquina2 FROM NUT_PEDIDOS p,NUT_CLIENTES c WHERE p.idCliente=c.idCliente AND p.estado = "INICIADO" ';
+        $sql = 'SELECT idPedido,c.idCliente, c.correo,c.nombre,c.celular,p.direccion_aclaracion aclaracion,p.nota_cliente nota,p.idPedido,p.fecha_realizacion,p.zona,p.direccion,p.subtotal,p.costo_envio,p.total,p.esquina1,p.esquina2,p.estado FROM NUT_PEDIDOS p,NUT_CLIENTES c WHERE p.idCliente=c.idCliente ';
         if ($idPedido) {
             $query = $this->db->query($sql . " AND idPedido='" . $idPedido . "'");
             return $query->row_array();

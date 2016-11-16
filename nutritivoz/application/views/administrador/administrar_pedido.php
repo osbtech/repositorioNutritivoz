@@ -115,10 +115,10 @@
             <div class="form-group">
                 <input type="hidden" name="idProducto[]" value="<?= $detalle['idProducto'] ?>"/>
                 <div class="col-sm-3"><input type="text" class="form-control" readonly="readonly" name="nombre[]" value="<?= $detalle['nombre'] ?>" /></div>
-                <div class="col-sm-2"><input type="number" class="form-control"  name="cantidad[]" value="<?= $detalle['cantidad'] ?>" /></div>
-                <div class="col-sm-2"><input type="number" class="form-control"  name="precio[]" value="<?= $detalle['precio'] ?>" /></div>
-                <div class="col-sm-2"><input type="number" class="form-control"  name="cantidad_entregada[]" value="<?= $detalle['cantidad_entregada'] ?>" /></div>
-                <div class="col-sm-2"><input type="number" class="form-control"  name="cantidad_proveedor[]" value="<?= $detalle['cantidad_proveedor'] ?>" /></div>                
+                <div class="col-sm-2"><input type="text" class="form-control"  name="cantidad[]" value="<?= $detalle['cantidad'] ?>" /></div>
+                <div class="col-sm-2"><input type="text" class="form-control"  name="precio[]" value="<?= $detalle['precio'] ?>" /></div>
+                <div class="col-sm-2"><input type="text" class="form-control"  name="cantidad_entregada[]" value="<?= $detalle['cantidad_entregada'] ?>" /></div>
+                <div class="col-sm-2"><input type="text" class="form-control"  name="cantidad_proveedor[]" value="<?= $detalle['cantidad_proveedor'] ?>" /></div>                
             </div>
         <?php } ?>
     </div>

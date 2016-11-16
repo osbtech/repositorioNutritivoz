@@ -14,6 +14,7 @@ function base_url_control() {
 }
 
 function calcularCostoEnvio($total) {
+    return 0;
     if ($total <= 500) {
         return 100;
     } else if (($total > 500) && ($total <= 1000)) {

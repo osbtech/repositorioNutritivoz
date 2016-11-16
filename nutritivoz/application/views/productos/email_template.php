@@ -11,43 +11,37 @@
         </p><BR/>
         <p style="font-size:18px;color:#000;line-height:25px;display:block;padding-bottom:5px;border-bottom:1px solid #f6f6f6;margin-bottom:15px;">Datos del comprador:</p>
 
-        <div style="display:block;line-height:20px;font-size:14px">Nombre: </span> <b><?= $nombre ?></b></div>
-    <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Dirección: </span> <b><?= $direccion ?></b></div>
-    <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Esquina 1: </span> <b><?= $esquina1 ?></b></div>
-    <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Esquina 2: </span> <b><?= $esquina2 ?></b></div>
-    <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Aclaración dirección: </span> <b><?= $aclDireccion ?></b></div>
-    <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Celular: </span> <b><?= $celular ?></b></div>
-    <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Zona: </span> <b><?= $zona ?></b></div>
-    <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Día de entrega: </span> <b>Sábado</b></div>
-    <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Horario: </span> <b><?= $horario ?></b></div>
-    <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Notas: </span> <b><?= $notas ?></b></div>
-</div>        
-<BR/>                
+        <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Nombre: </span> <b><?= $nombre ?></b></div>
+        <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Dirección: </span> <b><?= $direccion ?></b></div>
+        <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Esquina 1: </span> <b><?= $esquina1 ?></b></div>
+        <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Esquina 2: </span> <b><?= $esquina2 ?></b></div>
+        <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Aclaración dirección: </span> <b><?= $aclDireccion ?></b></div>
+        <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Celular: </span> <b><?= $celular ?></b></div>
+        <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Zona: </span> <b><?= $zona ?></b></div>
+        <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Día de entrega: </span> <b>Sábado</b></div>
+<!--        <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Horario: </span> <b><?= $horario ?></b></div> -->
+        <div style="margin-bottom:10px"><span style="font-size:13px;color:#464646;">Notas: </span> <b><?= $notas ?></b></div>
+
+    <BR/>                
 
 <p style="font-size:18px;color:#000;line-height:25px;display:block;padding-bottom:5px;border-bottom:1px solid #f6f6f6;margin-bottom:15px;">Detalle del pedido:</p>
 
 <table style="padding-bottom:10px;padding-top:10px; line-height:25px">
-    <thead>
+<!--    <thead>
         <tr style="border-bottom:1px solid #f6f6f6; font-size:15px; color:#000; font-weight:bold" align="center">
             <td align="left">Producto</td>
             <td align="center">Cant.</td>
-            <td align="center">Unidad</td>
-            <td align="center">Marca</td>
             <td align="right">Total</td>
         </tr>
-    </thead>
+    </thead>  -->
     <?php foreach ($items as $item) { ?>
         <tr align="center">
-            <td align="left" width="380px"><?= $item['nombre'] ?></td>
-            <td width="60px" align="center"><?= $item['cantidad'] ?></td>
-            <td width="60px" align="center"><?= $item['unidad'] ?></td>
-            <td width="60px" align="center"><?= $item['marca'] ?></td>            
-            <td width="60px" align="right"><?= $item['cantidad'] * $item['precio'] ?></td>
+            <td align="left" width="380px"><b><?= $item['nombre']. "</b> (".$item['unidad'].") ". $item['marca'] ?></td>
+            <td width="60px" align="center" valign="top"><?= $item['cantidad'] ?></td>
+            <td width="60px" align="right" valign="top">$ <?= $item['cantidad'] * $item['precio'] ?></td>
         </tr>
     <?php } ?>
     <tr style="line-height:10px">
-        <td style="border-bottom:5px solid #f6f6f6">&nbsp;</td>
-        <td style="border-bottom:5px solid #f6f6f6">&nbsp;</td>
         <td style="border-bottom:5px solid #f6f6f6">&nbsp;</td>
         <td style="border-bottom:5px solid #f6f6f6">&nbsp;</td>
         <td style="border-bottom:5px solid #f6f6f6">&nbsp;</td>

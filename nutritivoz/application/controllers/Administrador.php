@@ -2,10 +2,9 @@
 
 /**
  * Description of Administrador
- *aa
- * @author Juan Pablo prueba Ignacio
+ *
+ * @author Juan Pablo
  */
-
 class Administrador extends CI_Controller {
 
     public function __construct() {
@@ -135,9 +134,9 @@ class Administrador extends CI_Controller {
             $datosEmail['zona'] = $pedido['zona'];
             //$datosEmail['horario'] = $pedido['aclaracion'];
             $datosEmail['celular'] = $pedido['celular'];
-            $datosEmail['subtotal'] = $this->cart->total();
-            $datosEmail['envio'] = calcularCostoEnvio($this->cart->total());
-            $datosEmail['total'] = $this->cart->total() + calcularCostoEnvio($this->cart->total());
+            $datosEmail['subtotal'] =$pedido['subtotal'];
+            $datosEmail['envio'] = $pedido['costo_envio'];
+            $datosEmail['total'] = $pedido['total'];
             $datosEmail['notas'] = $pedido['nota'];
             $datosEmail['esquina1'] = $pedido['esquina1'];
             $datosEmail['esquina2'] = $pedido['esquina2'];
@@ -191,19 +190,23 @@ class Administrador extends CI_Controller {
             $cantidad = $this->input->post('cantidad');
             $cantidadEntregada = $this->input->post('cantidad_entregada');
             $cantidadProveedor = $this->input->post('cantidad_proveedor');
-            $idProducto=$this->input->post('idProducto');
+            $idProducto = $this->input->post('idProducto');
             $precio = $this->input->post('precio');
             $subtotal = 0;
             $this->pedidos_model->borrar_pedido_detalles($idPedido);
             for ($x = 0; $x < count($cantidad); $x++) {
                 $subtotal = $subtotal + $precio[$x];
-                $this->pedidos_model->guardarDetallePedido($idPedido, $idProducto[$x], $cantidad[$x], $precio[$x],$cantidadEntregada[$x],$cantidadProveedor[$x]);
+                $this->pedidos_model->guardarDetallePedido($idPedido, $idProducto[$x], $cantidad[$x], $precio[$x], $cantidadEntregada[$x], $cantidadProveedor[$x]);
             }
             $total = $subtotal + $this->input->post('costo_envio');
-            $this->pedidos_model->actualizar_pedidoAdm($idPedido, $this->input->post('idCliente'), $this->input->post('fecha_realizacion'), $this->input->post('fecha_entrega_estimada'), $this->input->post('fecha_entrega'), $this->input->post('zona'), $this->input->post('direccion'), $this->input->post('direccion_aclaracion'), $this->input->post('nota_cliente'), $subtotal, $this->input->post('costo_envio'), $total, $this->input->post('esquina1'), $this->input->post('esquina2'), $this->input->post('estado'),$this->input->post('nota_postventa'));
+            $this->pedidos_model->actualizar_pedidoAdm($idPedido, $this->input->post('idCliente'), $this->input->post('fecha_realizacion'), $this->input->post('fecha_entrega_estimada'), $this->input->post('fecha_entrega'), $this->input->post('zona'), $this->input->post('direccion'), $this->input->post('direccion_aclaracion'), $this->input->post('nota_cliente'), $subtotal, $this->input->post('costo_envio'), $total, $this->input->post('esquina1'), $this->input->post('esquina2'), $this->input->post('estado'), $this->input->post('nota_postventa'));
 
             redirect('/administrador/listado_pedidos');
         }
+    }
+
+    public function quitar_prod_pedido($idProducto) {
+        
     }
 
 }
