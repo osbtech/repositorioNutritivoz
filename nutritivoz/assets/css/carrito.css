@@ -1,0 +1,51 @@
+.tdInputProduct {
+	text-align: right;
+	width: 130px;
+}
+
+.carrito{
+    padding: 10px;
+}
+
+#divCarrito{
+    padding: 1% 1.5%;
+    border: 1px solid #B3A633;
+    webkit-border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -o-border-radius: 10px 10px 10px 10px;
+    -ms-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+#tituloCarrito {
+    background-color: #373a3c;
+    color: #FFFFFF;
+    text-align:center;
+    height: 45px;
+    font-size: 25px;
+}
+
+#divCarrito button, #divCarrito input, #divCarrito select, #divCarrito textarea {
+    margin:5px !important;
+}
+
+#divCarrito input{
+    font-size: 15px !important;
+}
+
+#divCarrito .cant{
+    width: 60px;
+}
+
+#divCarrito label{
+    font-size: 15px !important;
+    margin-top: 10px;
+}
+
+.tdRight{
+    text-align: right;
+}
+
+.form-control{
+    line-height: 0.5 !important;
+}
