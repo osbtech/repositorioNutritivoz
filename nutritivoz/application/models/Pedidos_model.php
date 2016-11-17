@@ -103,7 +103,7 @@ class Pedidos_model extends CI_Model {
     }
 
     public function getDetallesPorProveedor($idProveedor = false) {
-        $str = 'SELECT p.idProducto,p.costo,p.nombre,p.unidad,m.nombre marca,pv.nombre proveedor,pv.idProveedor,SUM(pd.solicitar_proveedor) cantidadTotal,SUM(pd.solicitar_proveedor)*p.costo precio  FROM NUT_PEDIDOS_DETALLE pd,NUT_PRODUCTOS p,NUT_MARCAS m, NUT_PROVEEDORES pv, NUT_PEDIDOS ped ';
+        $str = 'SELECT p.idProducto,p.costo,p.nombre,p.unidad,m.nombre marca,pv.nombre proveedor,pv.idProveedor,SUM(pd.cantidad_proveedor) cantidadTotal,SUM(pd.cantidad_proveedor)*p.costo precio  FROM NUT_PEDIDOS_DETALLE pd,NUT_PRODUCTOS p,NUT_MARCAS m, NUT_PROVEEDORES pv, NUT_PEDIDOS ped ';
         $str.='WHERE pd.idProducto = p.idProducto AND m.idMarca=p.idMarca AND m.idProveedor=pv.idProveedor AND pv.idProveedor=' . $idProveedor . ' AND ped.idPedido = pd.idPedido AND ped.estado = "INICIADO" ';
         $str.=' GROUP BY p.idProducto';
         $str2 = 'SELECT * FROM (' . $str . ') AS result WHERE cantidadTotal > 0 ';

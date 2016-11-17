@@ -116,16 +116,18 @@ class Administrador extends CI_Controller {
         $this->form_validation->set_rules('titulo', 'Titulo', 'required');
         $this->form_validation->set_rules('email', 'Correo', 'required');
 
+        $pedido = $this->pedidos_model->getPedidos($idPedido/*$this->input->post('idPedido')*/);
+
         if ($this->form_validation->run() === FALSE) {
             $data['idPedido'] = $idPedido; //$this->pedidos_model->getPedidos($idPedido);            
+            $data['correo'] = $pedido['correo'];
             $this->load->view('includes_admin/head');
             $this->load->view('includes_admin/header');
             $this->load->view('administrador/email_pedido', $data);
             $this->load->view('includes_admin/footer');
         } else {
 
-            $pedido = $this->pedidos_model->getPedidos($this->input->post('idPedido'));
-            $detalles = $this->pedidos_model->getDetallePedidos($this->input->post('idPedido'));
+            $detalles = $this->pedidos_model->getDetallePedidos($idPedido/*$this->input->post('idPedido')*/);
 
             $datosEmail = array();
             $datosEmail['nombre'] = $pedido['nombre'];
@@ -156,7 +158,8 @@ class Administrador extends CI_Controller {
             $config['charset'] = 'utf-8';
             $config['wordwrap'] = TRUE;
             $this->email->initialize($config);
-            $this->email->from('ventas@nutritivoz.com', $this->input->post('titulo'));
+            $this->email->from('ventas@nutritivoz.com', "Nutritívoz - AlimentaciÃ³n saludable para todos");
+            $this->email->subject($this->input->post('titulo'));
             $this->email->to($this->input->post('email'));
 
             if ($this->input->post('cemail') != '')
@@ -165,7 +168,6 @@ class Administrador extends CI_Controller {
             if ($this->input->post('bemail') != '')
                 $this->email->bcc($this->input->post('bemail'));
 
-            $this->email->subject('Actualización de pedido.');
             $this->email->set_mailtype("html");
             $this->email->message($this->load->view('productos/email_template', $datosEmail, true));
             $this->email->send();
