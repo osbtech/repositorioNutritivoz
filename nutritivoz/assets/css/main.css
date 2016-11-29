@@ -169,6 +169,11 @@ header {
 }
 
 
+.boton-agregar {
+    background-color: #f6971d;
+    color: #fff;
+}
+
 /*slider*/
 .slider {
     float: left;

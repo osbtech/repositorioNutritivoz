@@ -4,7 +4,7 @@
     <div class="container">
 
 
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="center">
                 <div class="pricelist-box">
                     <h2>Lista de precios v&aacute;lida hasta el <?= $fechaCierrePedidos ?><br/></h2>
@@ -37,7 +37,7 @@
 
 
         <!-- carrito -->
-        <div class="col-md-3" id="divCarrito">
+        <div class="col-md-4" id="divCarrito">
              <div class="carrito">
                <div class="row" id="tituloCarrito">
                     Tu pedido

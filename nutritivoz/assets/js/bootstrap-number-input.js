@@ -22,7 +22,7 @@
                 clone.focus().val(n);
                 return true;
             }
-            var btn = $('<button type="button" data-update="1" name="name' + idProducto + '" data-idProducto="' + idProducto + '" class="btn btn-sm btn-danger" style="width:105px;">Agregar</button>').click(function () {
+            var btn = $('<button type="button" data-update="1" name="name' + idProducto + '" data-idProducto="' + idProducto + '" class="btn btn-sm boton-agregar" style="width:105px;">Agregar</button>').click(function () {
                 if ($(this).attr("data-update") == 1) {
                     setText(1);
                     actualizarCarrito($(this).attr("data-idProducto"), 1);

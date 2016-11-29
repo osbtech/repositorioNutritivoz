@@ -9,12 +9,12 @@
              <!--center-->
              
 <!--            <div class="center"> -->
-                <div class="middle-header-left"> hola</div>
+                <div class="middle-header-left"> </div>
                 <div class="middle-header-content">
                     <div class="middle-header-img"><a href="http://nutritivoz.com"><img src="<?= asset_url(); ?>img/nutritivoz-header-title.svg" alt="" /></a></div>
                     <div class="middle-header-title">Alimentaci&oacute;n saludable para todos</div>
                 </div>
-                <div class="middle-header-right"> hola</div>
+                <div class="middle-header-right"> </div>
        <!--     </div> <!--center-->
         </div><!--end middle-header-->
 
