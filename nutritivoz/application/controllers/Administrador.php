@@ -126,7 +126,7 @@ class Administrador extends CI_Controller {
         $this->form_validation->set_rules('titulo', 'Titulo', 'required');
         $this->form_validation->set_rules('email', 'Correo', 'required');
 
-        $pedido = $this->pedidos_model->getPedidos($idPedido/*$this->input->post('idPedido')*/);
+        $pedido = $this->pedidos_model->getPedidos($idPedido/* $this->input->post('idPedido') */);
 
         if ($this->form_validation->run() === FALSE) {
             $data['idPedido'] = $idPedido; //$this->pedidos_model->getPedidos($idPedido);            
@@ -137,7 +137,7 @@ class Administrador extends CI_Controller {
             $this->load->view('includes_admin/footer');
         } else {
 
-            $detalles = $this->pedidos_model->getDetallePedidos($idPedido/*$this->input->post('idPedido')*/);
+            $detalles = $this->pedidos_model->getDetallePedidos($idPedido/* $this->input->post('idPedido') */);
 
             $datosEmail = array();
             $datosEmail['nombre'] = $pedido['nombre'];
@@ -233,6 +233,36 @@ class Administrador extends CI_Controller {
             $this->load->view('includes_admin/header');
             $this->load->view('administrador/quitar_producto', $data);
             $this->load->view('includes_admin/footer');
+        }
+    }
+
+    public function enviar_email_osb() {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->load->library('email');
+        $this->form_validation->set_rules('nombre', 'Nombre', 'required');
+        $this->form_validation->set_rules('email', 'Correo', 'required');
+        $this->form_validation->set_rules('mensaje', 'Mensaje', 'required');
+        $this->form_validation->set_rules('firma', 'Firma', 'required');
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('osbtech_mailer/mail_producto');
+        } else {
+            $datosEmail['nombre'] = $this->input->post('nombre');
+            $datosEmail['mensaje'] = $this->input->post('mensaje');
+            $datosEmail['firma'] = $this->input->post('firma');
+            $config['protocol'] = 'sendmail';
+            $config['mailpath'] = '/usr/lib/sendmail';
+            $config['charset'] = 'utf-8';
+            $config['wordwrap'] = TRUE;
+            $this->email->initialize($config);
+            $this->email->from('info@osbtech.uy', "OSB TECH");
+            $this->email->subject("SiMEP - Reduzca el costo de sus procesos de producción");
+            $this->email->to($this->input->post('email'));
+            $this->email->set_mailtype("html");
+            $this->email->bcc('info@osbtech.uy');
+            $this->email->message($this->load->view('osbtech_mailer/email', $datosEmail, true));
+            $this->email->send();
+            echo "Mensaje enviado.";            
         }
     }
 
