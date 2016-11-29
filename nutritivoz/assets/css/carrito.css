@@ -8,20 +8,25 @@
 }
 
 #divCarrito{
-    padding: 1% 1.5%;
+    padding: 24px 3%;
     border: 1px solid #B3A633;
     webkit-border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;
     -o-border-radius: 10px 10px 10px 10px;
     -ms-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
+    background-image: url(../img/barra-tupedido.png);
+    background-repeat: no-repeat;
 }
 
 #tituloCarrito {
-    background-color: #373a3c;
+    background-color: #b3a633;
     color: #FFFFFF;
     text-align:center;
-    height: 45px;
+    align-items: center;
+    text-align:center;
+    display: flex;
+    height: 70px;
     font-size: 25px;
 }
 
@@ -40,6 +45,12 @@
 #divCarrito label{
     font-size: 15px !important;
     margin-top: 10px;
+}
+
+
+.boton-confirmar {
+    background-color: #b3a633;
+    color: #fff;
 }
 
 .tdRight{
