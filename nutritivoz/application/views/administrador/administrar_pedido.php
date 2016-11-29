@@ -76,7 +76,8 @@
                     <option <?php if ($pedido['estado'] == 'INICIADO') echo 'selected'; ?> value="INICIADO">INICIADO</option>
                     <option <?php if ($pedido['estado'] == 'CONFIRMADO') echo 'selected'; ?> value="CONFIRMADO">CONFIRMADO</option>
                     <option <?php if ($pedido['estado'] == 'ENTREGADO') echo 'selected'; ?> value="ENTREGADO">ENTREGADO</option>
-                    <option <?php if ($pedido['estado'] == 'CANCELADO') echo 'selected'; ?> value="INICIADO">CANCELADO</option>                                            
+                    <option <?php if ($pedido['estado'] == 'CANCELADO') echo 'selected'; ?> value="CANCELADO">CANCELADO</option> 
+                    <!-- xxss -->
                 </select>
             </div>
         </div>  

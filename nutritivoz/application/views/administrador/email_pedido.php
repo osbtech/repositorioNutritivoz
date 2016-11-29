@@ -9,14 +9,14 @@
         <div class="form-group">
             <label for="titulo" class="col-sm-2 control-label">Titulo</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
+                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo" value="Detalle de su pedido">
             </div>
         </div>
 
         <div class="form-group">
             <label for="email" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-5">
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?= $correo ?>">
             </div>
         </div>
 
@@ -29,13 +29,13 @@
         <div class="form-group">
             <label for="bemail" class="col-sm-2 control-label">BCC</label>
             <div class="col-sm-5">
-                <input type="email" class="form-control" id="bemail" name="bemail" placeholder="BCC Email">
+                <input type="email" class="form-control" id="bemail" name="bemail" placeholder="BCC Email" value="ventas@nutritivoz.com">
             </div>
         </div>
         <div class="form-group">
             <label for="mensaje" class="col-sm-2 control-label">Mensaje</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="mensaje" name="mensaje" placeholder="Mensaje">
+                <input type="text" class="form-control" id="mensaje" name="mensaje" placeholder="Mensaje" value="A continuación el detalle de su pedido. Quedamos atentos por cualquier consulta.<BR/>Equipo de Nutritívoz.">
             </div>
         </div>
         <div class="form-group">

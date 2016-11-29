@@ -38,7 +38,7 @@
         <tr align="center">
             <td align="left" width="380px"><b><?= $item['nombre']. "</b> (".$item['unidad'].") ". $item['marca'] ?></td>
             <td width="60px" align="center" valign="top"><?= $item['cantidad'] ?></td>
-            <td width="60px" align="right" valign="top">$ <?= $item['cantidad'] * $item['precio'] ?></td>
+            <td width="60px" align="right" valign="top">$ <?= $item['precio'] ?></td>
         </tr>
     <?php } ?>
     <tr style="line-height:10px">

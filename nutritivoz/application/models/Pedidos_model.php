@@ -76,15 +76,28 @@ class Pedidos_model extends CI_Model {
         return $this->db->simple_query("UPDATE NUT_PEDIDOS SET subtotal='" . $subTot . "', costo_envio='" . $costo_envio . "', total='" . $tot . "' WHERE idPedido='" . $idPedido . "'");
     }
 
+    /*
+    private function sqlPedidos() {
+        return 'SELECT idPedido,c.idCliente, c.correo,c.nombre,c.celular,p.direccion_aclaracion aclaracion,p.nota_cliente nota,p.idPedido,p.fecha_realizacion,p.zona,p.direccion,p.subtotal,p.costo_envio,p.total,p.esquina1,p.esquina2,p.estado FROM NUT_PEDIDOS p,NUT_CLIENTES c WHERE p.idCliente=c.idCliente ';
+    }
+    */
+    
+    const SQL_PEDIDOS = 'SELECT idPedido,c.idCliente, c.correo,c.nombre,c.celular,p.direccion_aclaracion aclaracion,p.nota_cliente nota,p.idPedido,p.fecha_realizacion,p.zona,p.direccion,p.subtotal,p.costo_envio,p.total,p.esquina1,p.esquina2,p.estado FROM NUT_PEDIDOS p,NUT_CLIENTES c WHERE p.idCliente=c.idCliente ';
+    
     public function getPedidos($idPedido = false) {
-        $sql = 'SELECT idPedido,c.idCliente, c.correo,c.nombre,c.celular,p.direccion_aclaracion aclaracion,p.nota_cliente nota,p.idPedido,p.fecha_realizacion,p.zona,p.direccion,p.subtotal,p.costo_envio,p.total,p.esquina1,p.esquina2,p.estado FROM NUT_PEDIDOS p,NUT_CLIENTES c WHERE p.idCliente=c.idCliente ';
         if ($idPedido) {
-            $query = $this->db->query($sql . " AND idPedido='" . $idPedido . "'");
+            $query = $this->db->query(self::SQL_PEDIDOS . " AND idPedido='" . $idPedido . "'");
             return $query->row_array();
         } else {
-            $query = $this->db->query($sql);
+            $query = $this->db->query(self::SQL_PEDIDOS);
             return $query->result_array();
         }
+    }
+    
+    public function getPedidosEstado($estado) {
+        $sql = self::SQL_PEDIDOS . " AND p.estado = '" . $estado . "'";
+        $query = $this->db->query($sql);
+        return $query->result_array();
     }
 
     public function getDetallePedidos($idPedido) {
@@ -96,15 +109,15 @@ class Pedidos_model extends CI_Model {
 
     public function getDetallesPorProveedorCanasta($idProveedor = false) {
         $str = 'SELECT pd.idPedido,pd.cantidad,pd.precio,p.nombre,p.unidad,m.nombre marca,pv.nombre proveedor,pv.idProveedor FROM NUT_PEDIDOS_DETALLE pd,NUT_PRODUCTOS p,NUT_MARCAS m, NUT_PROVEEDORES pv, NUT_PEDIDOS ped ';
-        $str.='WHERE pd.idProducto = p.idProducto AND m.idMarca=p.idMarca AND m.idProveedor=pv.idProveedor AND pv.idProveedor=' . $idProveedor . ' AND ped.idPedido = pd.idPedido AND ped.estado = "INICIADO"';
+        $str.='WHERE pd.idProducto = p.idProducto AND m.idMarca=p.idMarca AND m.idProveedor=pv.idProveedor AND pv.idProveedor=' . $idProveedor . " AND ped.idPedido = pd.idPedido AND ped.estado = 'CONFIRMADO'";
         $str.=' ORDER BY idProveedor, idPedido';
         $query = $this->db->query($str);
         return $query->result_array();
     }
 
     public function getDetallesPorProveedor($idProveedor = false) {
-        $str = 'SELECT p.idProducto,p.costo,p.nombre,p.unidad,m.nombre marca,pv.nombre proveedor,pv.idProveedor,SUM(pd.solicitar_proveedor) cantidadTotal,SUM(pd.solicitar_proveedor)*p.costo precio  FROM NUT_PEDIDOS_DETALLE pd,NUT_PRODUCTOS p,NUT_MARCAS m, NUT_PROVEEDORES pv, NUT_PEDIDOS ped ';
-        $str.='WHERE pd.idProducto = p.idProducto AND m.idMarca=p.idMarca AND m.idProveedor=pv.idProveedor AND pv.idProveedor=' . $idProveedor . ' AND ped.idPedido = pd.idPedido AND ped.estado = "INICIADO" ';
+        $str = 'SELECT p.idProducto,p.costo,p.nombre,p.unidad,m.nombre marca,pv.nombre proveedor,pv.idProveedor,SUM(pd.cantidad_proveedor) cantidadTotal,SUM(pd.cantidad_proveedor)*p.costo precio  FROM NUT_PEDIDOS_DETALLE pd,NUT_PRODUCTOS p,NUT_MARCAS m, NUT_PROVEEDORES pv, NUT_PEDIDOS ped ';
+        $str.='WHERE pd.idProducto = p.idProducto AND m.idMarca=p.idMarca AND m.idProveedor=pv.idProveedor AND pv.idProveedor=' . $idProveedor . " AND ped.idPedido = pd.idPedido AND ped.estado = 'CONFIRMADO'";
         $str.=' GROUP BY p.idProducto';
         $str2 = 'SELECT * FROM (' . $str . ') AS result WHERE cantidadTotal > 0 ';
         $query = $this->db->query($str2);

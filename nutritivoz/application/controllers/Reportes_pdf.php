@@ -35,19 +35,21 @@ class Reportes_pdf extends CI_Controller {
 		$this->pdf->SetTitle("Detalle de pedido");
 		$this->pdf->SetLeftMargin(20);
 		$this->pdf->SetRightMargin(20);	
-	 
 		
 		if ($idPedido) {
 			$listaPedidos = array($this->pedidos_model->getPedidos($idPedido));
 		} else {
-			$listaPedidos = $this->pedidos_model->getPedidos();
+			$listaPedidos = $this->pedidos_model->getPedidosEstado('CONFIRMADO');
 		}
 		
 		foreach ($listaPedidos as $pedido)
 		{
 			
 			$detallesPedido = $this->pedidos_model->getDetallePedidos($pedido['idPedido']);		
+                        
 			$this->pdf->AddPage();
+                        $this->pdf->Image(base_url().'assets/img/logo.png',70,12,80);
+                        $this->pdf->Ln(30);
 			
 			$this->pdf->SetFont('Arial', 'B', 9);
 			$this->pdf->Cell(15,7,'Pedido #'.$pedido['idPedido']);

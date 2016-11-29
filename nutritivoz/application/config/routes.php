@@ -56,6 +56,7 @@ $route['listado_productos/confirmar_pedido/(:any)'] = 'listado_productos/confirm
 $route['default_controller'] = 'listado_productos/listado_Productos';
 $route['administrador/listado_pedidos'] = 'administrador/listado_pedidos';
 $route['administrador/listado_pedidos'] = 'administrador/listado_pedidos';
+$route['osbtech_mailer/enviar_email'] = 'osbtech_mailer/enviar_email';
 $route['reportes/pedidos/(:any)'] = 'reportes/pedidos/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
