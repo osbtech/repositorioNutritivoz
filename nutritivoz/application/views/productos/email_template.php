@@ -51,11 +51,13 @@
         <td/>
         <td align="right">$ <?= $subtotal ?></td>
     </tr>
+    <?php if($envio>0){ ?>
     <tr>
         <td>Costo de envío</td>
         <td/>
         <td align="right">$ <?= $envio ?></td>
     </tr>
+    ?>
     <tr style="font-weight:bold">
         <td>Importe total de la compra</td>
         <td/>
