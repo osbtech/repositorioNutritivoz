@@ -25,7 +25,7 @@ class Pedidos_model extends CI_Model {
      * @param type $notaCliente
      * @param type $zona
      */
-    public function guardar_pedido($idCliente, $zona, $direccion, $aclaracionDir, $horario, $notaCliente, $subtotal, $costoEnvio, $total, $hash, $esquina1, $esquina2) {
+    public function guardar_pedido($idCliente, $zona, $direccion, $aclaracionDir, $horario, $notaCliente, $subtotal, $costoEnvio, $total, $hash, $esquina1, $esquina2, $idZona) {
         $date = date('Y-m-d H:i:s');
         $data = array(
             'fecha_realizacion' => $date,
@@ -40,7 +40,8 @@ class Pedidos_model extends CI_Model {
             'total' => $total,
             'hash' => $hash,
             'esquina1' => $esquina1,
-            'esquina2' => $esquina2
+            'esquina2' => $esquina2,
+            'idZona' => $idZona
         );
         $this->db->insert('NUT_PEDIDOS', $data);
         return $this->db->insert_id();
@@ -77,13 +78,13 @@ class Pedidos_model extends CI_Model {
     }
 
     /*
-    private function sqlPedidos() {
-        return 'SELECT idPedido,c.idCliente, c.correo,c.nombre,c.celular,p.direccion_aclaracion aclaracion,p.nota_cliente nota,p.idPedido,p.fecha_realizacion,p.zona,p.direccion,p.subtotal,p.costo_envio,p.total,p.esquina1,p.esquina2,p.estado FROM NUT_PEDIDOS p,NUT_CLIENTES c WHERE p.idCliente=c.idCliente ';
-    }
-    */
-    
+      private function sqlPedidos() {
+      return 'SELECT idPedido,c.idCliente, c.correo,c.nombre,c.celular,p.direccion_aclaracion aclaracion,p.nota_cliente nota,p.idPedido,p.fecha_realizacion,p.zona,p.direccion,p.subtotal,p.costo_envio,p.total,p.esquina1,p.esquina2,p.estado FROM NUT_PEDIDOS p,NUT_CLIENTES c WHERE p.idCliente=c.idCliente ';
+      }
+     */
+
     const SQL_PEDIDOS = 'SELECT idPedido,c.idCliente, c.correo,c.nombre,c.celular,p.direccion_aclaracion aclaracion,p.nota_cliente nota,p.idPedido,p.fecha_realizacion,p.zona,p.direccion,p.subtotal,p.costo_envio,p.total,p.esquina1,p.esquina2,p.estado FROM NUT_PEDIDOS p,NUT_CLIENTES c WHERE p.idCliente=c.idCliente ';
-    
+
     public function getPedidos($idPedido = false) {
         if ($idPedido) {
             $query = $this->db->query(self::SQL_PEDIDOS . " AND idPedido='" . $idPedido . "'");
@@ -93,7 +94,7 @@ class Pedidos_model extends CI_Model {
             return $query->result_array();
         }
     }
-    
+
     public function getPedidosEstado($estado) {
         $sql = self::SQL_PEDIDOS . " AND p.estado = '" . $estado . "'";
         $query = $this->db->query($sql);
@@ -102,23 +103,23 @@ class Pedidos_model extends CI_Model {
 
     public function getDetallePedidos($idPedido) {
         $str = 'SELECT pd.idPedidoDetalle,pd.idProducto,pd.cantidad,pd.cantidad_entregada,pd.cantidad_proveedor,pd.precio,p.nombre,p.unidad,m.nombre marca FROM NUT_PEDIDOS_DETALLE pd,NUT_PRODUCTOS p,NUT_MARCAS m ';
-        $str.='WHERE idPedido =' . $idPedido . ' AND pd.idProducto = p.idProducto AND m.idMarca=p.idMarca ORDER BY p.nombre';
+        $str .= 'WHERE idPedido =' . $idPedido . ' AND pd.idProducto = p.idProducto AND m.idMarca=p.idMarca ORDER BY p.nombre';
         $query = $this->db->query($str);
         return $query->result_array();
     }
 
     public function getDetallesPorProveedorCanasta($idProveedor = false) {
         $str = 'SELECT pd.idPedido,pd.cantidad,pd.precio,p.nombre,p.unidad,m.nombre marca,pv.nombre proveedor,pv.idProveedor FROM NUT_PEDIDOS_DETALLE pd,NUT_PRODUCTOS p,NUT_MARCAS m, NUT_PROVEEDORES pv, NUT_PEDIDOS ped ';
-        $str.='WHERE pd.idProducto = p.idProducto AND m.idMarca=p.idMarca AND m.idProveedor=pv.idProveedor AND pv.idProveedor=' . $idProveedor . " AND ped.idPedido = pd.idPedido AND ped.estado = 'CONFIRMADO'";
-        $str.=' ORDER BY idProveedor, idPedido';
+        $str .= 'WHERE pd.idProducto = p.idProducto AND m.idMarca=p.idMarca AND m.idProveedor=pv.idProveedor AND pv.idProveedor=' . $idProveedor . " AND ped.idPedido = pd.idPedido AND ped.estado = 'CONFIRMADO'";
+        $str .= ' ORDER BY idProveedor, idPedido';
         $query = $this->db->query($str);
         return $query->result_array();
     }
 
     public function getDetallesPorProveedor($idProveedor = false) {
         $str = 'SELECT p.idProducto,p.costo,p.nombre,p.unidad,m.nombre marca,pv.nombre proveedor,pv.idProveedor,SUM(pd.cantidad_proveedor) cantidadTotal,SUM(pd.cantidad_proveedor)*p.costo precio  FROM NUT_PEDIDOS_DETALLE pd,NUT_PRODUCTOS p,NUT_MARCAS m, NUT_PROVEEDORES pv, NUT_PEDIDOS ped ';
-        $str.='WHERE pd.idProducto = p.idProducto AND m.idMarca=p.idMarca AND m.idProveedor=pv.idProveedor AND pv.idProveedor=' . $idProveedor . " AND ped.idPedido = pd.idPedido AND ped.estado = 'CONFIRMADO'";
-        $str.=' GROUP BY p.idProducto';
+        $str .= 'WHERE pd.idProducto = p.idProducto AND m.idMarca=p.idMarca AND m.idProveedor=pv.idProveedor AND pv.idProveedor=' . $idProveedor . " AND ped.idPedido = pd.idPedido AND ped.estado = 'CONFIRMADO'";
+        $str .= ' GROUP BY p.idProducto';
         $str2 = 'SELECT * FROM (' . $str . ') AS result WHERE cantidadTotal > 0 ';
         $query = $this->db->query($str2);
         return $query->result_array();
@@ -148,9 +149,9 @@ class Pedidos_model extends CI_Model {
 
     public function quitarProductoPedidos($idProducto) {
         $query = $this->db->query("SELECT d.idPedidoDetalle,d.idPedido  FROM nut_pedidos p,nut_pedidos_detalle d WHERE d.idProducto = '" . $idProducto . "' AND p.idPedido=d.idPedido AND p.estado='INICIADO'");
-        $res = $query->result_array();       
-        foreach ($res as $r){
-            $this->db->simple_query("UPDATE NUT_PEDIDOS_DETALLE SET cantidad_entregada='0',cantidad_proveedor='0' WHERE idPedidoDetalle='".$r['idPedidoDetalle']."' ");
+        $res = $query->result_array();
+        foreach ($res as $r) {
+            $this->db->simple_query("UPDATE NUT_PEDIDOS_DETALLE SET cantidad_entregada='0',cantidad_proveedor='0' WHERE idPedidoDetalle='" . $r['idPedidoDetalle'] . "' ");
         }
         return $res;
     }
