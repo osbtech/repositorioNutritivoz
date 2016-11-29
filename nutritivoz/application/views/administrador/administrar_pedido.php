@@ -86,7 +86,10 @@
             <div class="col-sm-4">
                 <input type="text" class="form-control" value="<?= $pedido['costo_envio'] ?>" id="costo_envio" name="costo_envio">
             </div>
-            <div class="col-lg-6"></div>
+            <label for="celular" class="col-sm-2 control-label">Celular</label>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" value="<?= $clientePedido['celular'] ?>" id="costo_envio" name="celular">
+            </div>
         </div>  
 
         <div class="form-group">

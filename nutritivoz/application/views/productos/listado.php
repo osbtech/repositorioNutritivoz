@@ -215,7 +215,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <button type="submit" class="btn btn-success btn-md btn-block">Hacer pedido</button>
+                    <button type="submit" id="btnEnviarPedido" class="btn btn-success btn-md btn-block">Hacer pedido</button>
                 </div>	
             </div>
             </form>
@@ -303,6 +303,11 @@
         $('#carritoItems').append(html);
         $('.cenvio').text('$' + envio);
         $('.ctotal').text('$' + (total + envio));
+        if (total == 0) {
+            $('#btnEnviarPedido').attr('disabled', 'disabled');
+        } else {
+            $('#btnEnviarPedido').removeAttr('disabled');
+        }
         agregarCambio();
     };
     $('#after').bootstrapNumber();
