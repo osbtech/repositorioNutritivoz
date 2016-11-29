@@ -28,6 +28,7 @@ class Zona extends CI_Controller {
 
     public function seleccionar_zona() {
         if ($this->input->post('idZona') > 0) {
+            $_SESSION['zona'] = $this->input->post('idZona');
             $this->cart->destroy();
             // redirect('/listado_productos/listado_productos');
         }
