@@ -22,6 +22,16 @@ class Administrador extends CI_Controller {
         $this->load->view('administrador/listado_pedidos', $data);
         $this->load->view('includes_admin/footer');
     }
+    
+    public function resumen_pedidos() {
+        $data['pedidos'] = $this->pedidos_model->getPedidosEstado('CONFIRMADO');
+        $this->load->view('includes_admin/head');
+        $this->load->view('includes_admin/header');
+        $this->load->view('administrador/resumen_pedidos', $data);
+        $this->load->view('includes_admin/footer');
+    }
+    
+    
 
     public function actualizarCantidadEntregada($idPedido = false) {
 

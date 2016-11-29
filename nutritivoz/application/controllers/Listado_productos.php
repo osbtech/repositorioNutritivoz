@@ -26,6 +26,7 @@ class Listado_productos extends CI_Controller {
     }
 
     public function listado_productos() {
+        $this->session->sess_expiration = '28800';      // Session expires in 8 hours
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->library('email');
