@@ -135,10 +135,28 @@ header {
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80300b', endColorstr='#cc5328', GradientType=1);
     /* IE6-9 */
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
+
+.middle-header > div {
+    display: table-cell;
+}
+
+.middle-header-left {
+    
+}
+
+.middle-header-right {
+    
+}
+
+
 .middle-header-content {
     max-width: 340px;
     margin: 0 auto;
+    text-align: center;
 }
 .middle-header-img, .middle-header-title {
     float: left;
