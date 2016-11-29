@@ -183,6 +183,7 @@ class Administrador extends CI_Controller {
             $data['pedido'] = $this->pedidos_model->getPedidosCompleto($idPedido);
             $data['detalles'] = $this->pedidos_model->getDetallePedidos($idPedido);
             $data['clientes'] = $this->clientes_model->obtener_cliente();
+            $data['clientePedido'] = $this->clientes_model->obtener_cliente($data['pedido']['idCliente']);
             $data['idPedido'] = $idPedido;
             $this->load->view('includes_admin/head');
             $this->load->view('includes_admin/header');
@@ -195,6 +196,9 @@ class Administrador extends CI_Controller {
             $idProducto = $this->input->post('idProducto');
             $precio = $this->input->post('precio');
             $subtotal = 0;
+            $pedido=$this->pedidos_model->getPedidosCompleto($idPedido);
+            $cliente = $this->clientes_model->obtener_cliente($pedido['idCliente']);
+            $this->clientes_model->actualizar_cliente($cliente['correo'],$cliente['nombre'],$this->input->post('celular'));
             $this->pedidos_model->borrar_pedido_detalles($idPedido);
             for ($x = 0; $x < count($cantidad); $x++) {
                 $subtotal = $subtotal + $precio[$x];
