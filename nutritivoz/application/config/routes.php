@@ -60,3 +60,4 @@ $route['osbtech_mailer/enviar_email'] = 'osbtech_mailer/enviar_email';
 $route['reportes/pedidos/(:any)'] = 'reportes/pedidos/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['zona/zonas'] = 'zona/zonas';
