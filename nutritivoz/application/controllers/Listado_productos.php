@@ -40,11 +40,12 @@ class Listado_productos extends CI_Controller {
         $this->form_validation->set_rules('zona', 'Zona', 'required');
         // $this->form_validation->set_rules('horario', 'Horario', 'required');
         if ($this->form_validation->run() === FALSE) {
-            $data['categorias'] = $this->productos_model->get_productosByCategoria();
-            $q=$this->config_model->getFechas();
+            $data['categorias'] = $this->productos_model->get_productosByCategoria($_SESSION['zona']);
+            $data['localidades'] = $this->zona_model->get_localidadesByZona($_SESSION['zona']);
+            $q = $this->config_model->getFechas();
             $data['fechaProxEntrega'] = $q['FechaProxEntrega'];
-            $data['fechaCierrePedidos'] = array('Domingo', 'Lunes', 'Martes', 'Miércoles', 
-                    'Jueves', 'Viernes', 'S&aacute;bado')[date('w', strtotime($q['FechaCierrePedidos']))]. " " .
+            $data['fechaCierrePedidos'] = array('Domingo', 'Lunes', 'Martes', 'Miércoles',
+                'Jueves', 'Viernes', 'S&aacute;bado')[date('w', strtotime($q['FechaCierrePedidos']))] . " " .
                     date("j/n", strtotime($q['FechaCierrePedidos']));
 
             $this->load->view('includes/head');
@@ -76,7 +77,7 @@ class Listado_productos extends CI_Controller {
             $datosEmail['esquina1'] = $this->input->post('esquina1');
             $datosEmail['esquina2'] = $this->input->post('esquina2');
             foreach ($this->cart->contents() as $items) {
-                $this->pedidos_model->guardarDetallePedido($idPedido, $items['id'], $items['qty'], ($items['price'] * $items['qty']),$items['qty'],$items['qty']);
+                $this->pedidos_model->guardarDetallePedido($idPedido, $items['id'], $items['qty'], ($items['price'] * $items['qty']), $items['qty'], $items['qty']);
                 $producto = $this->productos_model->get_productos($items['id']);
                 $marca = $this->productos_model->get_marcas($producto['idMarca']);
                 $carroItem['unidad'] = $producto['unidad'];
