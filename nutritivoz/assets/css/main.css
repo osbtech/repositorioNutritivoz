@@ -146,28 +146,38 @@ header {
     display: table-cell;
 }
 
-.middle-header-left {
-    
-}
-
-.middle-header-right {
-    
-}
-
 
 .middle-header-content {
     max-width: 340px;
     margin: 0 auto;
     text-align: center;
 }
+
 .middle-header-img, .middle-header-title {
     float: left;
     width: 100%;
 }
 .middle-header-title {
-    font: normal 17px"dejavu_sansextralight", Arial, helvetica, sans-serif;
+    font: normal 16px"dejavu_sansextralight", Arial, helvetica, sans-serif;
     text-align: center;
     color: #fff;
+}
+
+.header-text-1 {
+    color: #f6981e;
+    font: normal 15px"dejavu_sansextralight", Arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.header-text-2 {
+    color: #fff;
+    font: normal 14px"dejavu_sansextralight", Arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+.header-text-3 {
+    color: #fff;
+    font: normal 13px"dejavu_sansextralight", Arial, helvetica, sans-serif;
+
 }
 
 .head-lista-precios {

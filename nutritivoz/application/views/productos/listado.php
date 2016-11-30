@@ -229,8 +229,6 @@
     
 </div>
     
-<h2>Lista de precios v&aacute;lida hasta el <?= $fechaCierrePedidos ?><br/></h2>
-<p><strong>Env&iacute;os sin costo a todo Montevideo y la Costa de Oro.</strong> Hac&eacute; tu pedido escribiendo a <a href="mailto:ventas@nutritivoz.com">ventas@nutritivoz.com</a></p><p>&nbsp;</p>
 
     
 <script>
