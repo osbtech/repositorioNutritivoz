@@ -60,7 +60,7 @@ class Listado_productos extends CI_Controller {
                 $idCliente = $cliente['idCliente'];
                 $this->clientes_model->actualizar_cliente($this->input->post('correo'), $this->input->post('nombre'), (string) $this->input->post('celular'));
             }
-            $idPedido = $this->pedidos_model->guardar_pedido($idCliente, $this->input->post('zona'), $this->input->post('direccion'), $this->input->post('aclDireccion'), '', $this->input->post('notas'), $this->cart->total(), calcularCostoEnvio($this->cart->total()), $this->cart->total() + calcularCostoEnvio($this->cart->total()), md5($idCliente + $this->cart->total()), $this->input->post('esquina1'), $this->input->post('esquina2'));
+            $idPedido = $this->pedidos_model->guardar_pedido($idCliente, $this->input->post('zona'), $this->input->post('direccion'), $this->input->post('aclDireccion'), '', $this->input->post('notas'), $this->cart->total(), calcularCostoEnvio($this->cart->total()), $this->cart->total() + calcularCostoEnvio($this->cart->total()), md5($idCliente + $this->cart->total()), $this->input->post('esquina1'), $this->input->post('esquina2'), $_SESSION['zona']);
             $datosEmail = array();
             $datosEmail['nombre'] = $this->input->post('nombre');
             $datosEmail['direccion'] = $this->input->post('direccion');

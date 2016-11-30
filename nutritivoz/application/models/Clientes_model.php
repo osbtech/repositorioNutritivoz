@@ -17,18 +17,23 @@ class Clientes_model extends CI_Model {
         $this->load->database();
     }
 
-    public function guardar_cliente($correo, $nombre, $celular) {
+    public function guardar_cliente($correo, $nombre, $celular, $fbId = '') {
         $data = array(
             'correo' => $correo,
             'nombre' => $nombre,
-            'celular' => $celular
+            'celular' => $celular,
+            'fbId' => $fbId
         );
         $this->db->insert('NUT_CLIENTES', $data);
         return $this->db->insert_id();
     }
 
-    public function actualizar_cliente($correo, $nombre, $celular) {
-        return $this->db->simple_query("UPDATE NUT_CLIENTES SET nombre='" . $nombre . "',celular='" . $celular . "' WHERE correo='" . $correo . "'");
+    public function actualizar_cliente($correo, $nombre, $celular, $fbId = '') {
+        return $this->db->simple_query("UPDATE NUT_CLIENTES SET nombre='" . $nombre . "',celular='" . $celular . "', fbId='" . $fbId . "' WHERE correo='" . $correo . "'");
+    }
+
+    public function actualizarPassword($correo, $password) {
+        return $this->db->simple_query("UPDATE NUT_CLIENTES SET password='" . $password . "' WHERE correo='" . $correo . "'");
     }
 
     public function obtener_cliente($idCliente = FALSE) {

@@ -29,13 +29,13 @@
                 } else {
                     $(this).attr("data-update", 1);
                 }
-                var group = $("<div class='input-group input-group-sm' style='width:105px;'></div>");
-                var down = $("<button data-idProducto=" + idProducto + " type='button'>-</button>").attr('class', 'btn ').click(function () {
+                var group = $("<div class='input-group input-group-sm ingreso-cantidad' style='width:105px; height:100%;'></div>");
+                var down = $("<button data-idProducto=" + idProducto + " type='button'>-</button>").attr('class', 'btn boton-quitar').click(function () {
                     var cnt = parseInt(clone.val()) - 1;
                     setText(cnt);
                     actualizarCarrito($(this).attr("data-idProducto"), cnt);
                 });
-                var up = $("<button data-idProducto=" + idProducto + " type='button'>+</button>").attr('class', 'btn btn-success').click(function () {
+                var up = $("<button data-idProducto=" + idProducto + " type='button'>+</button>").attr('class', 'btn boton-agregar').click(function () {
                     var cnt = parseInt(clone.val()) + 1;
                     setText(cnt);
                     actualizarCarrito($(this).attr("data-idProducto"), cnt);

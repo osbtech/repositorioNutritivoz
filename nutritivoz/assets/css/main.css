@@ -1,6 +1,7 @@
 /* ==========================================================================   Base styles   ========================================================================== */
 html, button, input, select, textarea {
     color: #222;
+    outline: none !important;
 }
 a, a:hover, a:active, a:focus {
     outline: 0;
@@ -67,6 +68,7 @@ textarea {
     margin: 0 auto;
     display: block;
 }
+
 /*help style*/
 .margin-right-0 {
     margin-right: 0!important;
@@ -144,34 +146,73 @@ header {
     display: table-cell;
 }
 
-.middle-header-left {
-    
-}
-
-.middle-header-right {
-    
-}
-
 
 .middle-header-content {
     max-width: 340px;
     margin: 0 auto;
     text-align: center;
 }
+
 .middle-header-img, .middle-header-title {
     float: left;
     width: 100%;
 }
 .middle-header-title {
-    font: normal 17px"dejavu_sansextralight", Arial, helvetica, sans-serif;
+    font: normal 16px"dejavu_sansextralight", Arial, helvetica, sans-serif;
     text-align: center;
     color: #fff;
 }
 
+.header-text-1 {
+    color: #f6981e;
+    font: normal 15px"dejavu_sansextralight", Arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.header-text-2 {
+    color: #fff;
+    font: normal 14px"dejavu_sansextralight", Arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+.header-text-3 {
+    color: #fff;
+    font: normal 13px"dejavu_sansextralight", Arial, helvetica, sans-serif;
+
+}
+
+.head-lista-precios {
+    background: #eb7723;
+    color: #fff;
+    height: 70px;
+}
+
+.head-lista-precios th {
+    vertical-align: middle !important;
+}
 
 .boton-agregar {
     background-color: #f6971d;
     color: #fff;
+}
+
+.boton-agregar:hover {
+    background-color: #eb7723;
+}
+
+.boton-quitar {
+    background-color: #f6971d;
+    color: #fff;
+}
+
+.boton-quitar:hover {
+    background-color: #eb7723;
+}
+
+.ingreso-cantidad {
+    background-color: #ffd474 !important;
+    height: 30px;
+    line-height:30px;
+    font-weight: bold;
 }
 
 /*slider*/
@@ -629,13 +670,20 @@ header {
 .pricelist-box {
     float: left;
     width: 100%;
-    padding: 1% 1.5%;
-    border: 1px solid #B3A633;
+    padding: 34px 1.5%;
+    border: 1px solid #eb7723;
     webkit-border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;
     -o-border-radius: 10px 10px 10px 10px;
     -ms-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
+    background-image: url(../img/barra-colores.png);
+    background-repeat: no-repeat;
+}
+
+.pricelist-box .form-control {
+    border: none !important;
+    border-radius: 0 !important;
 }
 
 /*box*/
