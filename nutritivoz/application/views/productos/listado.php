@@ -36,9 +36,9 @@
 
         <!-- carrito -->
         <div class="col-md-4" id="divCarrito">
-            <div class="carrito">
-                <div class="row" id="tituloCarrito">
-                    Tu pedido
+             <div class="row carrito">
+               <div id="tituloCarrito">
+                   <div style="align:center; width:100%;">Tu pedido</div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -160,6 +160,13 @@
         </div>
 
     </div>
+    
+</div>
+    
+
+    
+<script>
+    var url = '<?= base_url_control() ?>/carrito/agregar_producto';
     <script>
         var url = '<?= base_url_control() ?>/carrito/agregar_producto';
 
