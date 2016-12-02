@@ -206,8 +206,9 @@
 
     </div>
 
-
-
+    
+<script>
+    var url = '<?= base_url_control() ?>/carrito/agregar_producto';
     <script>
         var url = '<?= base_url_control() ?>/carrito/agregar_producto';
 
