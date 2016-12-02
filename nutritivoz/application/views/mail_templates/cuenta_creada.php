@@ -2,15 +2,15 @@
     <head>
     </head>
     <body>
-        <p>Cuenta creada</p>
+        <p>Cuenta creada!</p>
         <table>
             <tr>
                 <td>Usuario:</td>
-                <td>usuario</td>
+                <td><?=$usuario;?></td>
             </tr>
             <tr>
                 <td>Contraseña:</td>
-                <td>pass</td>
+                <td><?= $contrasena; ?></td>
             </tr>
         </table>
     </body>

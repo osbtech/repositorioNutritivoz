@@ -57,7 +57,7 @@
         <td/>
         <td align="right">$ <?= $envio ?></td>
     </tr>
-    ?>
+    <?php } ?>
     <tr style="font-weight:bold">
         <td>Importe total de la compra</td>
         <td/>
@@ -79,6 +79,5 @@
         </tbody>
     </table>                
 <?php } ?>
-
 </body>
 </html>
