@@ -89,18 +89,7 @@ class Listado_productos extends CI_Controller {
         }
         /* fin login con facebook */
 
-        if ($this->form_validation->run() === FALSE) {
-            $data['categorias'] = $this->productos_model->get_productosByCategoria();
-            $q = $this->config_model->getFechas();
-            $data['fechaProxEntrega'] = $q['FechaProxEntrega'];
-            $data['fechaCierrePedidos'] = array('Domingo', 'Lunes', 'Martes', 'Miércoles',
-                'Jueves', 'Viernes', 'S&aacute;bado')[date('w', strtotime($q['FechaCierrePedidos']))] . " " .
-                    date("j/n", strtotime($q['FechaCierrePedidos']));
-
-            $this->load->view('includes/head');
-            $this->load->view('includes/header');
-            $this->load->view('productos/listado', $data);
-            $this->load->view('includes/footer');
+        if ($this->form_validation->run() === FALSE) {           
             if (isset($_SESSION['zona'])) {
                 $data['categorias'] = $this->productos_model->get_productosByCategoria($_SESSION['zona']);
                 $data['localidades'] = $this->zona_model->get_localidadesByZona($_SESSION['zona']);
