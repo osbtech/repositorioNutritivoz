@@ -5,6 +5,7 @@
  *
  * @author Juan Pablo
  */
+ 
 class Administrador extends CI_Controller {
 
     public function __construct() {
