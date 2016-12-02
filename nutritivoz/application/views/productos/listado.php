@@ -299,184 +299,62 @@
             $(this).bootstrapNumber($(this).attr("data-idProducto"));
         });
 
-        /*  var scrollCarrito = function () {
-         var offset = $("#divCarrito").offset();
-         var topPadding = 15;
-         $(window).scroll(function () {
-         if ($("#divCarrito").height() < $(window).height() && $(window).scrollTop() > offset.top) {
-         $("#divCarrito").stop().animate({
-         marginTop: $(window).scrollTop() - offset.top + topPadding
-         });
-         } else {
-         $("#divCarrito").stop().animate({
-         marginTop: 0
-         });
-         }
-         ;
-         });
-         };*/
-
-     //   obtenerCarrito();
-    //    agregarCambio();
-   // };
-    $('#after').bootstrapNumber();
-    $(".myspin").each(function () {
-        $(this).bootstrapNumber($(this).attr("data-idProducto"));
-    });
-
-    /*  var scrollCarrito = function () {
-     var offset = $("#divCarrito").offset();
-     var topPadding = 15;
-     $(window).scroll(function () {
-     if ($("#divCarrito").height() < $(window).height() && $(window).scrollTop() > offset.top) {
-     $("#divCarrito").stop().animate({
-     marginTop: $(window).scrollTop() - offset.top + topPadding
-     });
-     } else {
-     $("#divCarrito").stop().animate({
-     marginTop: 0
-     });
-     }
-     ;
-     });
-     };*/
 
     obtenerCarrito();
     agregarCambio();
-    /*$('#comprar').click(function(){
-     window.location.replace("<?= base_url_control() ?>/carrito/resumen");
-     });*/
-    
+
     var lastScrollTop = 0;
     var indice = 1;
-    $(window).on("scroll", function() {
-        
+    $(window).on("scroll", function () {
+
         var headerHeight = $('#inicio')[0].clientHeight;
         var carritoHeight = $("#divCarrito")[0].clientHeight;
         var carritoTop = $("#divCarrito")[0].offsetTop;
         var footerHeight = $('footer')[0].clientHeight;
-       
-        console.log("---");
-        console.log("window.innerHeight " + window.innerHeight);
-        console.log("carritoHeight ", carritoHeight);
-        console.log("headerHeight ", headerHeight);
-        console.log(window.innerHeight - carritoHeight - headerHeight);
-        console.log(carritoHeight - document.body.scrollTop);
-        console.log("document.body.scrollTop ", document.body.scrollTop);
-        console.log("document.body.scrollHeight ", document.body.scrollHeight);
-        console.log("carritoTop " + carritoTop);
-        
-           
+
         var st = $(this).scrollTop();
-        if (st > lastScrollTop){
+        if (st > lastScrollTop) {
             // downscroll code
             indice = 1;
-           
-            if (document.body.scrollHeight - document.body.scrollTop <= window.innerHeight + 50){
-                $("#divCarrito").css("margin-top", window.innerHeight-carritoHeight-footerHeight - 30);
+
+            if (document.body.scrollHeight - document.body.scrollTop <= window.innerHeight + 50) {
+                $("#divCarrito").css("margin-top", window.innerHeight - carritoHeight - footerHeight - 30);
                 $("#divCarrito").css("position", "fixed");
-             }
+            }
             //else if(carritoHeight - document.body.scrollTop < 450) {
-            else if(Math.abs(window.innerHeight - carritoHeight - headerHeight) < document.body.scrollTop) {  
-                $("#divCarrito").css("margin-top", window.innerHeight-carritoHeight - 10); //inicial -400
+            else if (Math.abs(window.innerHeight - carritoHeight - headerHeight) < document.body.scrollTop) {
+                $("#divCarrito").css("margin-top", window.innerHeight - carritoHeight - 10); //inicial -400
                 $("#divCarrito").css("position", "fixed");
-                
+
             } else {
-                $('#btnEnviarPedido').removeAttr('disabled');
+                $("#divCarrito").css("margin-top", headerHeight + 30);
+                $("#divCarrito").css("position", "absolute");
+                //                indice = indice + 30;
+                //                var a = carritoHeight - 10;
+                //                $("#divCarrito").css("margin-top", a + indice);
+                //                $("#divCarrito").css("position", "fixed");
             }
-            agregarCambio();
-        };
-        $('#after').bootstrapNumber();
-        $(".myspin").each(function () {
-            $(this).bootstrapNumber($(this).attr("data-idProducto"));
-        });
+        } else {
+            // upscroll code
 
-        /*  var scrollCarrito = function () {
-         var offset = $("#divCarrito").offset();
-         var topPadding = 15;
-         $(window).scroll(function () {
-         if ($("#divCarrito").height() < $(window).height() && $(window).scrollTop() > offset.top) {
-         $("#divCarrito").stop().animate({
-         marginTop: $(window).scrollTop() - offset.top + topPadding
-         });
-         } else {
-         $("#divCarrito").stop().animate({
-         marginTop: 0
-         });
-         }
-         ;
-         });
-         };*/
-
-        obtenerCarrito();
-        agregarCambio();
-        /*$('#comprar').click(function(){
-         window.location.replace("<?= base_url_control() ?>/carrito/resumen");
-         });*/
-
-        var lastScrollTop = 0;
-        var indice = 1;
-        $(window).on("scroll", function () {
-
-            var headerHeight = $('#inicio')[0].clientHeight;
-            var carritoHeight = $("#divCarrito")[0].clientHeight;
-            var carritoTop = $("#divCarrito")[0].offsetTop;
-            var footerHeight = $('footer')[0].clientHeight;
-
-            console.log("---");
-            console.log("window.innerHeight " + window.innerHeight);
-            console.log("carritoHeight ", carritoHeight);
-            console.log("headerHeight ", headerHeight);
-            console.log(window.innerHeight - carritoHeight - headerHeight);
-            console.log(carritoHeight - document.body.scrollTop);
-            console.log("document.body.scrollTop ", document.body.scrollTop);
-            console.log("document.body.scrollHeight ", document.body.scrollHeight);
-            console.log("carritoTop " + carritoTop);
-
-
-            var st = $(this).scrollTop();
-            if (st > lastScrollTop) {
-                // downscroll code
-                indice = 1;
-
-                if (document.body.scrollHeight - document.body.scrollTop <= window.innerHeight + 50) {
-                    $("#divCarrito").css("margin-top", window.innerHeight - carritoHeight - footerHeight - 30);
-                    $("#divCarrito").css("position", "fixed");
-                }
-                //else if(carritoHeight - document.body.scrollTop < 450) {
-                else if (Math.abs(window.innerHeight - carritoHeight - headerHeight) < document.body.scrollTop) {
-                    $("#divCarrito").css("margin-top", window.innerHeight - carritoHeight - 10); //inicial -400
-                    $("#divCarrito").css("position", "fixed");
-
-                } else {
-                    $("#divCarrito").css("margin-top", headerHeight + 30);
-                    $("#divCarrito").css("position", "absolute");
-                    //                indice = indice + 30;
-                    //                var a = carritoHeight - 10;
-                    //                $("#divCarrito").css("margin-top", a + indice);
-                    //                $("#divCarrito").css("position", "fixed");
-                }
+            if (document.body.scrollTop <= headerHeight) {
+                $("#divCarrito").css("margin-top", headerHeight + 30);
+                $("#divCarrito").css("position", "absolute");
+            } else if (carritoTop >= 0) {
+                $("#divCarrito").css("margin-top", 10);
+                $("#divCarrito").css("position", "fixed");
             } else {
-                // upscroll code
-
-                if (document.body.scrollTop <= headerHeight) {
-                    $("#divCarrito").css("margin-top", headerHeight + 30);
-                    $("#divCarrito").css("position", "absolute");
-                } else if (carritoTop >= 0) {
-                    $("#divCarrito").css("margin-top", 10);
-                    $("#divCarrito").css("position", "fixed");
-                } else {
-                    indice = indice + 30;
-                    var a = window.innerHeight - carritoHeight - 10;
-                    $("#divCarrito").css("margin-top", a + indice);
-                    $("#divCarrito").css("position", "fixed");
-                }
-
-
+                indice = indice + 30;
+                var a = window.innerHeight - carritoHeight - 10;
+                $("#divCarrito").css("margin-top", a + indice);
+                $("#divCarrito").css("position", "fixed");
             }
-            lastScrollTop = st;
 
-        });
+
+        }
+        lastScrollTop = st;
+
+    });
 
 
 
