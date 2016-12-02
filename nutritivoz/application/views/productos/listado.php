@@ -102,10 +102,10 @@
 
                     <!--    <div class="col-md-4">
                     <?php if (@$user_profile): ?>
-                                        <b><?= $user_profile['name'] ?></b>                        
-                                        <a href="<?= $logout_url ?>" class="btn btn-sm btn-primary btn-block" role="button">Logout</a>                         
+                                                <b><?= $user_profile['name'] ?></b>                        
+                                                <a href="<?= $logout_url ?>" class="btn btn-sm btn-primary btn-block" role="button">Logout</a>                         
                     <?php else: ?>
-                                        <a href="<?= $login_url ?>" class="btn btn-sm btn-primary btn-block" role="button">FB</a>
+                                                <a href="<?= $login_url ?>" class="btn btn-sm btn-primary btn-block" role="button">FB</a>
                     <?php endif; ?>
                         </div>-->
 
@@ -117,59 +117,58 @@
                 <div class="row">
                     <label class="col-xs-4 col-md-4 control-label">Correo</label>
                     <div class="col-xs-8">
-                        <input type="email" <?= isset($cliente['correo'])?'readonly':'' ?> value="<?= isset($cliente['correo'])?$cliente['correo']:'' ?>" class="form-control" name="correo" id="correo" required />
+                        <input type="email" <?= isset($cliente['correo']) ? 'readonly' : '' ?> value="<?= isset($cliente['correo']) ? $cliente['correo'] : '' ?>" class="form-control" name="correo" id="correo" required />
                     </div>
                 </div>
                 <div class="row">
                     <label class="col-xs-4 col-md-4 control-label">Nombre</label>
                     <div class="col-xs-8">
-                        <input type="text" value="<?= isset($cliente['nombre'])?$cliente['nombre']:'' ?>" class="form-control" name="nombre" id="correo" required />
+                        <input type="text" value="<?= isset($cliente['nombre']) ? $cliente['nombre'] : '' ?>" class="form-control" name="nombre" id="correo" required />
                     </div>
                 </div>            
                 <div class="row">
                     <label class="col-xs-4 control-label">Celular</label>
                     <div class="col-xs-8">
-                        <input type="text" value="<?= isset($cliente['celular'])?$cliente['celular']:'' ?>" class="form-control" name="celular" id="celular" required />
+                        <input type="text" value="<?= isset($cliente['celular']) ? $cliente['celular'] : '' ?>" class="form-control" name="celular" id="celular" required />
                     </div>
                 </div>
 
                 <div class="row">
                     <label class="col-xs-4 control-label">Dirección</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" value="<?= isset($cliente['direccion'])?$cliente['direccion']:'' ?>" name="direccion" id="direccion" required />
+                        <input type="text" class="form-control" value="<?= isset($cliente['direccion']) ? $cliente['direccion'] : '' ?>" name="direccion" id="direccion" required />
                     </div>
                 </div>
                 <div class="row">
                     <label class="col-xs-4 control-label">Esquina 1</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" value="<?= isset($cliente['esquina1'])?$cliente['esquina1']:'' ?>" name="esquina1" id="direccion" required />
+                        <input type="text" class="form-control" value="<?= isset($cliente['esquina1']) ? $cliente['esquina1'] : '' ?>" name="esquina1" id="esquina1" required />
                     </div>
                 </div>
                 <div class="row">
                     <label class="col-xs-4 control-label">Esquina 2</label>
                     <div class="col-xs-8">
-                        <input type="text" value="<?= isset($cliente['esquina2'])?$cliente['esquina2']:'' ?>" class="form-control" name="esquina2" id="direccion" required />
+                        <input type="text" value="<?= isset($cliente['esquina2']) ? $cliente['esquina2'] : '' ?>" class="form-control" name="esquina2" id="esquina2" required />
                     </div>
                 </div>
                 <div class="row">
                     <label class="col-xs-4 control-label">Aclaración dir.</label>
                     <div class="col-xs-8">
-                        <input type="text" value="<?= isset($cliente['direccion_aclaracion'])?$cliente['direccion_aclaracion']:'' ?>" class="form-control" name="aclDireccion" id="aclDireccion" />
+                        <input type="text" value="<?= isset($cliente['direccion_aclaracion']) ? $cliente['direccion_aclaracion'] : '' ?>" class="form-control" name="aclDireccion" id="aclDireccion" />
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-xs-4 control-label">Zona</label>
+                    <label class="col-xs-4 control-label">Localidad</label>
                     <div class="col-xs-8 selectContainer">
-                        <select class="form-control" name="zona" id="zona" required>
-                            <option value=''>Seleccionar</option>
-                            <?php
-                            foreach ($localidades as $localidad) {
-                                ?>
+                        <select class="form-control" name="localidad" id="localidad" required>
+                            <?php if (isset($cliente['localidad'])&&$cliente['idZona']==$_SESSION['zona']) { ?>
+                            <option selected="selected" value="<?= $cliente['localidad']['idLocalidad'] ?>"><?= $cliente['localidad']['nombre'] ?></option>
+                            <?php } ?>
+                            <?php print_r($localidades); ?>
+                            <?php foreach ($localidades as $localidad) { ?>
                                 <option value="<?= $localidad['idLocalidad'] ?>"><?= $localidad['nombre'] ?></option>
-                                <?php
-                            }
-                            ?>
+                            <?php } ?>
                         </select>
                     </div>
                 </div>

@@ -36,7 +36,7 @@ class Clientes_model extends CI_Model {
     }
 
     public function actualizar_cliente($correo, $nombre, $celular, $fbId, $idZona, $idLocalidad, $direccion, $dirAclaracion, $esquina1, $esquina2) {
-        return $this->db->simple_query("UPDATE NUT_CLIENTES SET nombre='" . $nombre . "',celular='" . $celular . "', fbId='" . $fbId . "', idZona='" . $idZona . "', idLocalidad='" . $idLocalidad . "',direccion='" . $direccion . "', direccion_aclaracion='" . $dirAclaracion . "', esquina1 ='" . $esquina1 . "',esquina1='" . $esquina2 . "'  WHERE correo='" . $correo . "'");
+        return $this->db->simple_query("UPDATE NUT_CLIENTES SET nombre='" . $nombre . "',celular='" . $celular . "', fbId='" . $fbId . "', idZona='" . $idZona . "', idLocalidad='" . $idLocalidad . "',direccion='" . $direccion . "', direccion_aclaracion='" . $dirAclaracion . "', esquina1 ='" . $esquina1 . "',esquina2='" . $esquina2 . "'  WHERE correo='" . $correo . "'");
     }
 
     public function actualizarPassword($correo, $password) {

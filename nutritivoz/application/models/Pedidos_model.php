@@ -25,7 +25,7 @@ class Pedidos_model extends CI_Model {
      * @param type $notaCliente
      * @param type $zona
      */
-    public function guardar_pedido($idCliente, $zona, $direccion, $aclaracionDir, $horario, $notaCliente, $subtotal, $costoEnvio, $total, $hash, $esquina1, $esquina2, $idZona) {
+    public function guardar_pedido($idCliente, $zona, $direccion, $aclaracionDir, $horario, $notaCliente, $subtotal, $costoEnvio, $total, $hash, $esquina1, $esquina2, $idZona, $idLocalidad) {
         $date = date('Y-m-d H:i:s');
         $data = array(
             'fecha_realizacion' => $date,
@@ -41,7 +41,8 @@ class Pedidos_model extends CI_Model {
             'hash' => $hash,
             'esquina1' => $esquina1,
             'esquina2' => $esquina2,
-            'idZona' => $idZona
+            'idZona' => $idZona,
+            'idLocalidad' => $idLocalidad
         );
         $this->db->insert('NUT_PEDIDOS', $data);
         return $this->db->insert_id();

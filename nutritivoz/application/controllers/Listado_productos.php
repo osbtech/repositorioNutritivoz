@@ -40,7 +40,7 @@ class Listado_productos extends CI_Controller {
         $this->form_validation->set_rules('esquina1', 'Esquina 1', 'required');
         $this->form_validation->set_rules('esquina2', 'Esquina 2', 'required');
         //$this->form_validation->set_rules('aclDireccion', 'Aclaración dirreción', 'required');
-        $this->form_validation->set_rules('zona', 'Zona', 'required');
+        $this->form_validation->set_rules('localidad', 'Localidad', 'required');
         // $this->form_validation->set_rules('horario', 'Horario', 'required');
 
         /* login con facebook */
@@ -92,6 +92,7 @@ class Listado_productos extends CI_Controller {
             //Obtener cliente
             if ($this->session->userdata('username') != null) {
                 $data['cliente'] = $this->clientes_model->obtener_clienteByMail($this->session->userdata('email'));
+                $data['cliente']['localidad'] = $this->zona_model->get_localidades($data['cliente']['idLocalidad']);
             }
             if (isset($_SESSION['zona'])) {
                 $data['categorias'] = $this->productos_model->get_productosByCategoria($_SESSION['zona']);
@@ -113,20 +114,21 @@ class Listado_productos extends CI_Controller {
             $cliente = $this->clientes_model->obtener_clienteByMail($this->input->post('correo'));
             if ($cliente == null) {
                 $ps = $this->rand_passwd();
-                $idCliente = $this->clientes_model->guardar_cliente($this->input->post('correo'), $this->input->post('nombre'), (string) $this->input->post('celular'), '', '0', '0', $this->input->post('direccion'), $this->input->post('aclDireccion'), $this->input->post('esquina1'), $this->input->post('esquina2'), $ps);
+                $idCliente = $this->clientes_model->guardar_cliente($this->input->post('correo'), $this->input->post('nombre'), (string) $this->input->post('celular'), '', $_SESSION['zona'], $this->input->post('localidad'), $this->input->post('direccion'), $this->input->post('aclDireccion'), $this->input->post('esquina1'), $this->input->post('esquina2'), $ps);
                 $data['contrasena'] = $ps;
                 $data['usuario'] = $this->input->post('correo');
                 $this->email_model->enviar_mail('mail_templates/cuenta_creada', $this->input->post('correo'), $data, "Cuenta creada", "Cuenta creada");
             } else {
                 $idCliente = $cliente['idCliente'];
-                $this->clientes_model->actualizar_cliente($this->input->post('correo'), $this->input->post('nombre'), (string) $this->input->post('celular'), $cliente['fbId'], '0', '0', $this->input->post('direccion'), $this->input->post('aclDireccion'), $this->input->post('esquina1'), $this->input->post('esquina2'));
+                $this->clientes_model->actualizar_cliente($this->input->post('correo'), $this->input->post('nombre'), (string) $this->input->post('celular'), $cliente['fbId'],$_SESSION['zona'], $this->input->post('localidad'), $this->input->post('direccion'), $this->input->post('aclDireccion'), $this->input->post('esquina1'), $this->input->post('esquina2'));
             }
-            $idPedido = $this->pedidos_model->guardar_pedido($idCliente, $this->input->post('zona'), $this->input->post('direccion'), $this->input->post('aclDireccion'), '', $this->input->post('notas'), $this->cart->total(), calcularCostoEnvio($this->cart->total()), $this->cart->total() + calcularCostoEnvio($this->cart->total()), md5($idCliente + $this->cart->total()), $this->input->post('esquina1'), $this->input->post('esquina2'), '0'); //$_SESSION['zona']);
+            $idPedido = $this->pedidos_model->guardar_pedido($idCliente, '', $this->input->post('direccion'), $this->input->post('aclDireccion'), '', $this->input->post('notas'), $this->cart->total(), calcularCostoEnvio($this->cart->total()), $this->cart->total() + calcularCostoEnvio($this->cart->total()), md5($idCliente + $this->cart->total()), $this->input->post('esquina1'), $this->input->post('esquina2'), $_SESSION['zona'], $this->input->post('localidad'));
             $datosEmail = array();
             $datosEmail['nombre'] = $this->input->post('nombre');
             $datosEmail['direccion'] = $this->input->post('direccion');
             $datosEmail['aclDireccion'] = $this->input->post('aclDireccion');
-            $datosEmail['zona'] = $this->input->post('zona');
+            $l=$this->zona_model->get_localidades($this->input->post('localidad'));
+            $datosEmail['zona'] = $l['nombre'].' '.$l['departamento'];
             $datosEmail['horario'] = $this->input->post('horario');
             $datosEmail['celular'] = $this->input->post('celular');
             $datosEmail['subtotal'] = $this->cart->total();
@@ -147,7 +149,7 @@ class Listado_productos extends CI_Controller {
                 $carroItem['nombre'] = $items['name'];
                 $datosEmail['items'][] = $carroItem;
             }
-            $this->email_model->enviar_mail('productos/email_template', 'ventas@nutritivoz.com', $datosEmail, 'Nutritívoz - Alimentación saludable para todos', 'Por favor, confirma tu pedido');
+            $this->email_model->enviar_mail('productos/email_template', $this->input->post('correo'), $datosEmail, 'Nutritívoz - Alimentación saludable para todos', 'Por favor, confirma tu pedido');
             $this->cart->destroy();
             $data['titulo'] = "Ya casi estamos";
             $data['mensaje'] = "Para confirmar el pedido por favor revisa tu correo electrónico.";
@@ -184,7 +186,7 @@ class Listado_productos extends CI_Controller {
     }
 
     public function logout() {
-        $this->session->unset_userdata(array('username', 'email', 'idUsuario'));
+        $this->session->unset_userdata(array('username', 'email', 'idUsuario','zona'));
         $this->logoutFB();
         redirect('listado_productos/listado_productos');
         //poner lo mismo en logout facebook
