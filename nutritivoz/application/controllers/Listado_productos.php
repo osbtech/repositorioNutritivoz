@@ -60,7 +60,7 @@ class Listado_productos extends CI_Controller {
                         'fbId' => $us['id']
                     );
                     $this->session->set_userdata($data);
-                  //  redirect('listado_productos/listado_productos');
+                    //  redirect('listado_productos/listado_productos');
                 } else {
                     $this->clientes_model->actualizar_cliente($us['email'], $us['name'], $cliente['celular'], $us['id'], $cliente['idZona'], $cliente['idLocalidad'], $cliente['direccion'], $cliente['direccion_aclaracion'], $cliente['esquina1'], $cliente['esquina2']);
                     $data = array(
@@ -70,9 +70,8 @@ class Listado_productos extends CI_Controller {
                         'fbId' => $cliente['fbId']
                     );
                     $this->session->set_userdata($data);
-                  //  redirect('listado_productos/listado_productos');
+                    //  redirect('listado_productos/listado_productos');
                 }
-                
             } catch (FacebookApiException $e) {
                 $user = null;
             }
@@ -89,7 +88,11 @@ class Listado_productos extends CI_Controller {
         }
         /* fin login con facebook */
 
-        if ($this->form_validation->run() === FALSE) {           
+        if ($this->form_validation->run() === FALSE) {
+            //Obtener cliente
+            if ($this->session->userdata('username') != null) {
+                $data['cliente'] = $this->clientes_model->obtener_clienteByMail($this->session->userdata('email'));
+            }
             if (isset($_SESSION['zona'])) {
                 $data['categorias'] = $this->productos_model->get_productosByCategoria($_SESSION['zona']);
                 $data['localidades'] = $this->zona_model->get_localidadesByZona($_SESSION['zona']);
@@ -109,7 +112,6 @@ class Listado_productos extends CI_Controller {
             $idCliente = 0;
             $cliente = $this->clientes_model->obtener_clienteByMail($this->input->post('correo'));
             if ($cliente == null) {
-                //                                        guardar_cliente($correo, $nombre, $celular, $fbId, $idZona, $idLocalidad, $direccion, $dirAclaracion, $esquina1, $esquina2) 
                 $ps = $this->rand_passwd();
                 $idCliente = $this->clientes_model->guardar_cliente($this->input->post('correo'), $this->input->post('nombre'), (string) $this->input->post('celular'), '', '0', '0', $this->input->post('direccion'), $this->input->post('aclDireccion'), $this->input->post('esquina1'), $this->input->post('esquina2'), $ps);
                 $data['contrasena'] = $ps;
@@ -145,19 +147,7 @@ class Listado_productos extends CI_Controller {
                 $carroItem['nombre'] = $items['name'];
                 $datosEmail['items'][] = $carroItem;
             }
-            $config['protocol'] = 'sendmail';
-            $config['mailpath'] = '/usr/lib/sendmail';
-            $config['charset'] = 'utf-8';
-            $config['wordwrap'] = TRUE;
-            $this->email->initialize($config);
-            $this->email->from('ventas@nutritivoz.com', 'Nutritívoz - Alimentación saludable para todos');
-            //$this->email->to($this->input->post('correo'));
-            $this->email->to('ventas@nutritivoz.com');
-            // $this->email->bcc('them@their-example.com');
-            $this->email->subject('Por favor, confirma tu pedido');
-            $this->email->set_mailtype("html");
-            $this->email->message($this->load->view('productos/email_template', $datosEmail, true));
-            $this->email->send();
+            $this->email_model->enviar_mail('productos/email_template', 'ventas@nutritivoz.com', $datosEmail, 'Nutritívoz - Alimentación saludable para todos', 'Por favor, confirma tu pedido');
             $this->cart->destroy();
             $data['titulo'] = "Ya casi estamos";
             $data['mensaje'] = "Para confirmar el pedido por favor revisa tu correo electrónico.";
