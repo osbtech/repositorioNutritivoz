@@ -67,7 +67,7 @@
                 </div>
                 <div class="row">
 
-                    <?php if (($this->session->userdata('username') == null)) { ?>
+                    <?php if ($this->session->userdata('username') == null) { ?>
                         <div class="col-md-8"> 
                             <?php echo form_open('listado_productos/login', 'role="form"'); ?> 
                             <?php if ($this->session->flashdata('error') != null) { ?>
@@ -102,10 +102,10 @@
 
                     <!--    <div class="col-md-4">
                     <?php if (@$user_profile): ?>
-                                    <b><?= $user_profile['name'] ?></b>                        
-                                    <a href="<?= $logout_url ?>" class="btn btn-sm btn-primary btn-block" role="button">Logout</a>                         
+                                        <b><?= $user_profile['name'] ?></b>                        
+                                        <a href="<?= $logout_url ?>" class="btn btn-sm btn-primary btn-block" role="button">Logout</a>                         
                     <?php else: ?>
-                                    <a href="<?= $login_url ?>" class="btn btn-sm btn-primary btn-block" role="button">FB</a>
+                                        <a href="<?= $login_url ?>" class="btn btn-sm btn-primary btn-block" role="button">FB</a>
                     <?php endif; ?>
                         </div>-->
 
@@ -117,44 +117,44 @@
                 <div class="row">
                     <label class="col-xs-4 col-md-4 control-label">Correo</label>
                     <div class="col-xs-8">
-                        <input type="email" class="form-control" name="correo" id="correo" required />
+                        <input type="email" <?= isset($cliente['correo'])?'readonly':'' ?> value="<?= isset($cliente['correo'])?$cliente['correo']:'' ?>" class="form-control" name="correo" id="correo" required />
                     </div>
                 </div>
                 <div class="row">
                     <label class="col-xs-4 col-md-4 control-label">Nombre</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" name="nombre" id="correo" required />
+                        <input type="text" value="<?= isset($cliente['nombre'])?$cliente['nombre']:'' ?>" class="form-control" name="nombre" id="correo" required />
                     </div>
                 </div>            
                 <div class="row">
                     <label class="col-xs-4 control-label">Celular</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" name="celular" id="celular" required />
+                        <input type="text" value="<?= isset($cliente['celular'])?$cliente['celular']:'' ?>" class="form-control" name="celular" id="celular" required />
                     </div>
                 </div>
 
                 <div class="row">
                     <label class="col-xs-4 control-label">Dirección</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" name="direccion" id="direccion" required />
+                        <input type="text" class="form-control" value="<?= isset($cliente['direccion'])?$cliente['direccion']:'' ?>" name="direccion" id="direccion" required />
                     </div>
                 </div>
                 <div class="row">
                     <label class="col-xs-4 control-label">Esquina 1</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" name="esquina1" id="direccion" required />
+                        <input type="text" class="form-control" value="<?= isset($cliente['esquina1'])?$cliente['esquina1']:'' ?>" name="esquina1" id="direccion" required />
                     </div>
                 </div>
                 <div class="row">
                     <label class="col-xs-4 control-label">Esquina 2</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" name="esquina2" id="direccion" required />
+                        <input type="text" value="<?= isset($cliente['esquina2'])?$cliente['esquina2']:'' ?>" class="form-control" name="esquina2" id="direccion" required />
                     </div>
                 </div>
                 <div class="row">
                     <label class="col-xs-4 control-label">Aclaración dir.</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" name="aclDireccion" id="aclDireccion" />
+                        <input type="text" value="<?= isset($cliente['direccion_aclaracion'])?$cliente['direccion_aclaracion']:'' ?>" class="form-control" name="aclDireccion" id="aclDireccion" />
                     </div>
                 </div>
 
@@ -206,9 +206,9 @@
 
     </div>
 
-    
-<script>
-    var url = '<?= base_url_control() ?>/carrito/agregar_producto';
+
+    <script>
+        var url = '<?= base_url_control() ?>/carrito/agregar_producto';
         var delay = (function () {
             var timer = 0;
             return function (callback, ms) {
@@ -300,61 +300,61 @@
         });
 
 
-    obtenerCarrito();
-    agregarCambio();
+        obtenerCarrito();
+        agregarCambio();
 
-    var lastScrollTop = 0;
-    var indice = 1;
-    $(window).on("scroll", function () {
+        var lastScrollTop = 0;
+        var indice = 1;
+        $(window).on("scroll", function () {
 
-        var headerHeight = $('#inicio')[0].clientHeight;
-        var carritoHeight = $("#divCarrito")[0].clientHeight;
-        var carritoTop = $("#divCarrito")[0].offsetTop;
-        var footerHeight = $('footer')[0].clientHeight;
+            var headerHeight = $('#inicio')[0].clientHeight;
+            var carritoHeight = $("#divCarrito")[0].clientHeight;
+            var carritoTop = $("#divCarrito")[0].offsetTop;
+            var footerHeight = $('footer')[0].clientHeight;
 
-        var st = $(this).scrollTop();
-        if (st > lastScrollTop) {
-            // downscroll code
-            indice = 1;
+            var st = $(this).scrollTop();
+            if (st > lastScrollTop) {
+                // downscroll code
+                indice = 1;
 
-            if (document.body.scrollHeight - document.body.scrollTop <= window.innerHeight + 50) {
-                $("#divCarrito").css("margin-top", window.innerHeight - carritoHeight - footerHeight - 30);
-                $("#divCarrito").css("position", "fixed");
-            }
-            //else if(carritoHeight - document.body.scrollTop < 450) {
-            else if (Math.abs(window.innerHeight - carritoHeight - headerHeight) < document.body.scrollTop) {
-                $("#divCarrito").css("margin-top", window.innerHeight - carritoHeight - 10); //inicial -400
-                $("#divCarrito").css("position", "fixed");
+                if (document.body.scrollHeight - document.body.scrollTop <= window.innerHeight + 50) {
+                    $("#divCarrito").css("margin-top", window.innerHeight - carritoHeight - footerHeight - 30);
+                    $("#divCarrito").css("position", "fixed");
+                }
+                //else if(carritoHeight - document.body.scrollTop < 450) {
+                else if (Math.abs(window.innerHeight - carritoHeight - headerHeight) < document.body.scrollTop) {
+                    $("#divCarrito").css("margin-top", window.innerHeight - carritoHeight - 10); //inicial -400
+                    $("#divCarrito").css("position", "fixed");
 
+                } else {
+                    $("#divCarrito").css("margin-top", headerHeight + 30);
+                    $("#divCarrito").css("position", "absolute");
+                    //                indice = indice + 30;
+                    //                var a = carritoHeight - 10;
+                    //                $("#divCarrito").css("margin-top", a + indice);
+                    //                $("#divCarrito").css("position", "fixed");
+                }
             } else {
-                $("#divCarrito").css("margin-top", headerHeight + 30);
-                $("#divCarrito").css("position", "absolute");
-                //                indice = indice + 30;
-                //                var a = carritoHeight - 10;
-                //                $("#divCarrito").css("margin-top", a + indice);
-                //                $("#divCarrito").css("position", "fixed");
+                // upscroll code
+
+                if (document.body.scrollTop <= headerHeight) {
+                    $("#divCarrito").css("margin-top", headerHeight + 30);
+                    $("#divCarrito").css("position", "absolute");
+                } else if (carritoTop >= 0) {
+                    $("#divCarrito").css("margin-top", 10);
+                    $("#divCarrito").css("position", "fixed");
+                } else {
+                    indice = indice + 30;
+                    var a = window.innerHeight - carritoHeight - 10;
+                    $("#divCarrito").css("margin-top", a + indice);
+                    $("#divCarrito").css("position", "fixed");
+                }
+
+
             }
-        } else {
-            // upscroll code
+            lastScrollTop = st;
 
-            if (document.body.scrollTop <= headerHeight) {
-                $("#divCarrito").css("margin-top", headerHeight + 30);
-                $("#divCarrito").css("position", "absolute");
-            } else if (carritoTop >= 0) {
-                $("#divCarrito").css("margin-top", 10);
-                $("#divCarrito").css("position", "fixed");
-            } else {
-                indice = indice + 30;
-                var a = window.innerHeight - carritoHeight - 10;
-                $("#divCarrito").css("margin-top", a + indice);
-                $("#divCarrito").css("position", "fixed");
-            }
-
-
-        }
-        lastScrollTop = st;
-
-    });
+        });
 
 
 
