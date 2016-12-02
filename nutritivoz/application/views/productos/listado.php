@@ -167,9 +167,6 @@
     
 <script>
     var url = '<?= base_url_control() ?>/carrito/agregar_producto';
-    <script>
-        var url = '<?= base_url_control() ?>/carrito/agregar_producto';
-
         var delay = (function () {
             var timer = 0;
             return function (callback, ms) {
@@ -277,9 +274,9 @@
          });
          };*/
 
-        obtenerCarrito();
-        agregarCambio();
-    };
+     //   obtenerCarrito();
+    //    agregarCambio();
+   // };
     $('#after').bootstrapNumber();
     $(".myspin").each(function () {
         $(this).bootstrapNumber($(this).attr("data-idProducto"));

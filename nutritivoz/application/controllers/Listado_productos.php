@@ -13,6 +13,7 @@ class Listado_productos extends CI_Controller {
         $this->load->model('pedidos_model');
         $this->load->model('clientes_model');
         $this->load->model('config_model');
+        $this->load->model('zona_model');
     }
 
     public function confirmar_pedido($hash) {

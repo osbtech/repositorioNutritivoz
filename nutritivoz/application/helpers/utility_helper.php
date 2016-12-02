@@ -1,4 +1,5 @@
 <?php
+
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 
 function asset_url() {
@@ -22,4 +23,10 @@ function calcularCostoEnvio($total) {
     } else if ($total > 1000) {
         return 0;
     }
+}
+
+function ObtenerZonaAndHorarios($idZona) {
+    $CI = & get_instance();
+    $CI->load->model('zona_model');
+    return $CI->zona_model->get_Zona($idZona);
 }

@@ -18,4 +18,12 @@ class Zona_model extends CI_Model {
         }
     }
 
+    
+       public function get_Zona($idZona) {
+        if ($idZona > 0) {
+            $query = $this->db->get_where('NUT_ZONA', array('idZona' => $idZona));
+            return $query->row_array();
+        }
+    }
+    
 }

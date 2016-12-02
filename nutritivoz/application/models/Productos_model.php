@@ -53,6 +53,9 @@ class Productos_model extends CI_Model {
             $categoria['productos'][] = $query->result_array();
             $resultado[] = $categoria;
         }
+        echo '<pre>';
+        print_r($resultado);
+        exit();
         return $resultado;
     }
 

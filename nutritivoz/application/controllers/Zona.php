@@ -33,5 +33,6 @@ class Zona extends CI_Controller {
             // redirect('/listado_productos/listado_productos');
         }
     }
+    
 
 }
