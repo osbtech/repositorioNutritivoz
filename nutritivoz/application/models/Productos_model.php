@@ -44,12 +44,12 @@ class Productos_model extends CI_Model {
       return $query->result_array();
       } */
 
-    public function get_productosByCategoria() {
+    public function get_productosByCategoria($idZona) {
         $query = $this->db->get('NUT_CATEGORIAS');
         $categorias = $query->result_array();
         $resultado = array();
         foreach ($categorias as $categoria) {
-            $query = $this->db->query("SELECT NUT_PRODUCTOS.*,NUT_MARCAS.nombre marca FROM NUT_PRODUCTOS,NUT_MARCAS WHERE NUT_PRODUCTOS.idMarca=NUT_MARCAS.idMarca AND stock > 0 AND activo = 1 AND idCategoria = " . $categoria['idCategoria']." ORDER BY nombre");
+            $query = $this->db->query("SELECT NUT_PRODUCTOS.*,NUT_MARCAS.nombre marca FROM NUT_PRODUCTOS,NUT_MARCAS,NUT_ZONA_PRODUCTO WHERE NUT_PRODUCTOS.idMarca=NUT_MARCAS.idMarca AND stock > 0 AND activo = 1 AND idCategoria = " . $categoria['idCategoria']." AND NUT_PRODUCTOS.idProducto = NUT_ZONA_PRODUCTO.idProducto AND NUT_ZONA_PRODUCTO.idZona=". $idZona." ORDER BY nombre");
             $categoria['productos'][] = $query->result_array();
             $resultado[] = $categoria;
         }
