@@ -36,9 +36,9 @@
 
         <!-- carrito -->
         <div class="col-md-4" id="divCarrito">
-             <div class="row carrito">
-               <div id="tituloCarrito">
-                   <div style="align:center; width:100%;">Tu pedido</div>
+            <div class="row carrito">
+                <div id="tituloCarrito">
+                    <div style="align:center; width:100%;">Tu pedido</div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -64,6 +64,51 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="row">
+
+                    <?php if (($this->session->userdata('username') == null)) { ?>
+                        <div class="col-md-8"> 
+                            <?php echo form_open('listado_productos/login', 'role="form"'); ?> 
+                            <?php if ($this->session->flashdata('error') != null) { ?>
+                                <div class="col-xs-8">
+                                    <?php echo $this->session->flashdata('error'); ?>
+                                </div>
+                            <?php } ?>                        
+                            <label class="col-xs-4 col-md-4 control-label">Email</label>
+                            <div class="col-xs-8">
+                                <input type="email" class="form-control" name="email" id="correo" required />
+                            </div>
+                            <label class="col-xs-4 col-md-4 control-label">Pass</label>
+                            <div class="col-xs-8">
+                                <input type="password" class="form-control" name="contrasena" id="correo" required />
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="submit" class="form-control" value="Enviar"/>
+                            </div>
+                            </form>
+                        </div>
+                        <div class="col-md-4"> 
+                            <a href="<?= $login_url ?>" class="btn btn-sm btn-primary btn-block" role="button">FB</a>
+                        </div>                     
+                    <?php } else { ?>
+
+                        <div class="col-md-8"> 
+                            <b><?= $this->session->userdata('username') ?></b>                        
+                            <a href="<?= base_url_control(); ?>listado_productos/logout" class="btn btn-sm btn-primary btn-block" role="button">Logout</a>  
+                        </div>
+
+                    <?php } ?>
+
+                    <!--    <div class="col-md-4">
+                    <?php if (@$user_profile): ?>
+                                    <b><?= $user_profile['name'] ?></b>                        
+                                    <a href="<?= $logout_url ?>" class="btn btn-sm btn-primary btn-block" role="button">Logout</a>                         
+                    <?php else: ?>
+                                    <a href="<?= $login_url ?>" class="btn btn-sm btn-primary btn-block" role="button">FB</a>
+                    <?php endif; ?>
+                        </div>-->
+
                 </div>
                 <hr>
                 <?php echo validation_errors(); ?>
@@ -223,210 +268,208 @@
                     </div>	
                 </div>
                 </form> 
+            </div>
+
         </div>
 
     </div>
-    
-</div>
-    
 
-    
-<script>
-    var url = '<?= base_url_control() ?>/carrito/agregar_producto';
 
-    var delay = (function () {
-        var timer = 0;
-        return function (callback, ms) {
-            clearTimeout(timer);
-            timer = setTimeout(callback, ms);
-        };
-    })();
 
-    var actualizarCarrito = function (idProducto, cantidad, update) {
-        if (cantidad == 0) {
-            $("[name='namei" + idProducto + "']").val(0);
-            $("#" + idProducto).val(0);
-        }
-        $.ajax({
-            url: url,
-            type: 'post',
-            data: {
-                idProducto: idProducto,
-                cantidad: cantidad
-            },
-            dataType: 'html',
-            success: function (data) {
-                var result = jQuery.parseJSON(data);
-                dibujarResumenCarro(result.carro, result.envio, result.total);
+    <script>
+        var url = '<?= base_url_control() ?>/carrito/agregar_producto';
+
+        var delay = (function () {
+            var timer = 0;
+            return function (callback, ms) {
+                clearTimeout(timer);
+                timer = setTimeout(callback, ms);
+            };
+        })();
+
+        var actualizarCarrito = function (idProducto, cantidad, update) {
+            if (cantidad == 0) {
+                $("[name='namei" + idProducto + "']").val(0);
+                $("#" + idProducto).val(0);
             }
-        });
-    };
-    var obtenerCarrito = function () {
-        $.ajax({
-            url: '<?= base_url_control() ?>/carrito/obtener_carrito',
-            type: 'post',
-            dataType: 'html',
-            success: function (data) {
-
-                var result = jQuery.parseJSON(data);
-                dibujarResumenCarro(result.carro, result.envio, result.total);
-            }
-        });
-    };
-    var aux = null;
-    var aux1 = null;
-
-    var agregarCambio = function () {
-        $('.rinput').keyup(function () {
-            aux = this.value;
-            aux1 = $(this).attr("data-idProducto");
-            delay(function () {
-                // alert('sdfsdf');
-                if (jQuery.isNumeric(aux)) {
-                    actualizarCarrito(aux1, aux);
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: {
+                    idProducto: idProducto,
+                    cantidad: cantidad
+                },
+                dataType: 'html',
+                success: function (data) {
+                    var result = jQuery.parseJSON(data);
+                    dibujarResumenCarro(result.carro, result.envio, result.total);
                 }
-            }, 500);
+            });
+        };
+        var obtenerCarrito = function () {
+            $.ajax({
+                url: '<?= base_url_control() ?>/carrito/obtener_carrito',
+                type: 'post',
+                dataType: 'html',
+                success: function (data) {
+
+                    var result = jQuery.parseJSON(data);
+                    dibujarResumenCarro(result.carro, result.envio, result.total);
+                }
+            });
+        };
+        var aux = null;
+        var aux1 = null;
+
+        var agregarCambio = function () {
+            $('.rinput').keyup(function () {
+                aux = this.value;
+                aux1 = $(this).attr("data-idProducto");
+                delay(function () {
+                    // alert('sdfsdf');
+                    if (jQuery.isNumeric(aux)) {
+                        actualizarCarrito(aux1, aux);
+                    }
+                }, 500);
 
 
-        });
+            });
 
-        $('.rinput').focusout(function () {
-            if (this.value == '') {
-                actualizarCarrito($(this).attr("data-idProducto"), 0);
-            }
-        });
-    };
-    var dibujarResumenCarro = function (items, envio, total) {
-        $('#carritoItems').empty();
-        var html = "";
-        $.each(items, function (i, item) {
-            $('#' + item.id).val(item.qty);
-            $("[name='name" + item.id + "']").attr("data-update", 0);
-            $("[name='name" + item.id + "']").trigger("click");
-            html += '<tr>' +
-                    '<td><input class="form-control cant rinput" type="text" data-idProducto="' + item.id + '" value="' + item.qty + '" name="namei' + item.id + '" /></td>' +
-                    '<td><label><strong>' + item.name + '</strong></label></td>' +
-                    '<td class="tdRight"><label>$' + (item.price * item.qty) + '</label></td>' +
-                    '</tr>';
-        });
-        $('#carritoItems').append(html);
-        $('.cenvio').text('$' + envio);
-        $('.ctotal').text('$' + (total + envio));
-        if (total == 0) {
-            $('#btnEnviarPedido').attr('disabled', 'disabled');
-        } else {
-            $('#btnEnviarPedido').removeAttr('disabled');
-        }
-        agregarCambio();
-    };
-    $('#after').bootstrapNumber();
-    $(".myspin").each(function () {
-        $(this).bootstrapNumber($(this).attr("data-idProducto"));
-    });
-
-    /*  var scrollCarrito = function () {
-     var offset = $("#divCarrito").offset();
-     var topPadding = 15;
-     $(window).scroll(function () {
-     if ($("#divCarrito").height() < $(window).height() && $(window).scrollTop() > offset.top) {
-     $("#divCarrito").stop().animate({
-     marginTop: $(window).scrollTop() - offset.top + topPadding
-     });
-     } else {
-     $("#divCarrito").stop().animate({
-     marginTop: 0
-     });
-     }
-     ;
-     });
-     };*/
-
-    obtenerCarrito();
-    agregarCambio();
-    /*$('#comprar').click(function(){
-     window.location.replace("<?= base_url_control() ?>/carrito/resumen");
-     });*/
-    
-    var lastScrollTop = 0;
-    var indice = 1;
-    $(window).on("scroll", function() {
-        
-        var headerHeight = $('#inicio')[0].clientHeight;
-        var carritoHeight = $("#divCarrito")[0].clientHeight;
-        var carritoTop = $("#divCarrito")[0].offsetTop;
-        var footerHeight = $('footer')[0].clientHeight;
-       
-        console.log("---");
-        console.log("window.innerHeight " + window.innerHeight);
-        console.log("carritoHeight ", carritoHeight);
-        console.log("headerHeight ", headerHeight);
-        console.log(window.innerHeight - carritoHeight - headerHeight);
-        console.log(carritoHeight - document.body.scrollTop);
-        console.log("document.body.scrollTop ", document.body.scrollTop);
-        console.log("document.body.scrollHeight ", document.body.scrollHeight);
-        console.log("carritoTop " + carritoTop);
-        
-           
-        var st = $(this).scrollTop();
-        if (st > lastScrollTop){
-            // downscroll code
-            indice = 1;
-           
-            if (document.body.scrollHeight - document.body.scrollTop <= window.innerHeight + 50){
-                $("#divCarrito").css("margin-top", window.innerHeight-carritoHeight-footerHeight - 30);
-                $("#divCarrito").css("position", "fixed");
-             }
-            //else if(carritoHeight - document.body.scrollTop < 450) {
-            else if(Math.abs(window.innerHeight - carritoHeight - headerHeight) < document.body.scrollTop) {  
-                $("#divCarrito").css("margin-top", window.innerHeight-carritoHeight - 10); //inicial -400
-                $("#divCarrito").css("position", "fixed");
-                
+            $('.rinput').focusout(function () {
+                if (this.value == '') {
+                    actualizarCarrito($(this).attr("data-idProducto"), 0);
+                }
+            });
+        };
+        var dibujarResumenCarro = function (items, envio, total) {
+            $('#carritoItems').empty();
+            var html = "";
+            $.each(items, function (i, item) {
+                $('#' + item.id).val(item.qty);
+                $("[name='name" + item.id + "']").attr("data-update", 0);
+                $("[name='name" + item.id + "']").trigger("click");
+                html += '<tr>' +
+                        '<td><input class="form-control cant rinput" type="text" data-idProducto="' + item.id + '" value="' + item.qty + '" name="namei' + item.id + '" /></td>' +
+                        '<td><label><strong>' + item.name + '</strong></label></td>' +
+                        '<td class="tdRight"><label>$' + (item.price * item.qty) + '</label></td>' +
+                        '</tr>';
+            });
+            $('#carritoItems').append(html);
+            $('.cenvio').text('$' + envio);
+            $('.ctotal').text('$' + (total + envio));
+            if (total == 0) {
+                $('#btnEnviarPedido').attr('disabled', 'disabled');
             } else {
-                $("#divCarrito").css("margin-top", headerHeight + 30);
-                $("#divCarrito").css("position", "absolute");
-//                indice = indice + 30;
-//                var a = carritoHeight - 10;
-//                $("#divCarrito").css("margin-top", a + indice);
-//                $("#divCarrito").css("position", "fixed");
+                $('#btnEnviarPedido').removeAttr('disabled');
             }
-        } else {
-           // upscroll code
-                     
-            if (document.body.scrollTop <= headerHeight) {
-                $("#divCarrito").css("margin-top", headerHeight + 30);
-                $("#divCarrito").css("position", "absolute");
-            }
-            else if (carritoTop >= 0){
-                $("#divCarrito").css("margin-top", 10);
-                $("#divCarrito").css("position", "fixed");
-            }
-            else {
-                indice = indice + 30;
-                var a = window.innerHeight-carritoHeight - 10;
-                $("#divCarrito").css("margin-top", a + indice);
-                $("#divCarrito").css("position", "fixed");
-            }
+            agregarCambio();
+        };
+        $('#after').bootstrapNumber();
+        $(".myspin").each(function () {
+            $(this).bootstrapNumber($(this).attr("data-idProducto"));
+        });
 
-           
+        /*  var scrollCarrito = function () {
+         var offset = $("#divCarrito").offset();
+         var topPadding = 15;
+         $(window).scroll(function () {
+         if ($("#divCarrito").height() < $(window).height() && $(window).scrollTop() > offset.top) {
+         $("#divCarrito").stop().animate({
+         marginTop: $(window).scrollTop() - offset.top + topPadding
+         });
+         } else {
+         $("#divCarrito").stop().animate({
+         marginTop: 0
+         });
+         }
+         ;
+         });
+         };*/
+
+        obtenerCarrito();
+        agregarCambio();
+        /*$('#comprar').click(function(){
+         window.location.replace("<?= base_url_control() ?>/carrito/resumen");
+         });*/
+
+        var lastScrollTop = 0;
+        var indice = 1;
+        $(window).on("scroll", function () {
+
+            var headerHeight = $('#inicio')[0].clientHeight;
+            var carritoHeight = $("#divCarrito")[0].clientHeight;
+            var carritoTop = $("#divCarrito")[0].offsetTop;
+            var footerHeight = $('footer')[0].clientHeight;
+
+            console.log("---");
+            console.log("window.innerHeight " + window.innerHeight);
+            console.log("carritoHeight ", carritoHeight);
+            console.log("headerHeight ", headerHeight);
+            console.log(window.innerHeight - carritoHeight - headerHeight);
+            console.log(carritoHeight - document.body.scrollTop);
+            console.log("document.body.scrollTop ", document.body.scrollTop);
+            console.log("document.body.scrollHeight ", document.body.scrollHeight);
+            console.log("carritoTop " + carritoTop);
+
+
+            var st = $(this).scrollTop();
+            if (st > lastScrollTop) {
+                // downscroll code
+                indice = 1;
+
+                if (document.body.scrollHeight - document.body.scrollTop <= window.innerHeight + 50) {
+                    $("#divCarrito").css("margin-top", window.innerHeight - carritoHeight - footerHeight - 30);
+                    $("#divCarrito").css("position", "fixed");
+                }
+                //else if(carritoHeight - document.body.scrollTop < 450) {
+                else if (Math.abs(window.innerHeight - carritoHeight - headerHeight) < document.body.scrollTop) {
+                    $("#divCarrito").css("margin-top", window.innerHeight - carritoHeight - 10); //inicial -400
+                    $("#divCarrito").css("position", "fixed");
+
+                } else {
+                    $("#divCarrito").css("margin-top", headerHeight + 30);
+                    $("#divCarrito").css("position", "absolute");
+                    //                indice = indice + 30;
+                    //                var a = carritoHeight - 10;
+                    //                $("#divCarrito").css("margin-top", a + indice);
+                    //                $("#divCarrito").css("position", "fixed");
+                }
+            } else {
+                // upscroll code
+
+                if (document.body.scrollTop <= headerHeight) {
+                    $("#divCarrito").css("margin-top", headerHeight + 30);
+                    $("#divCarrito").css("position", "absolute");
+                } else if (carritoTop >= 0) {
+                    $("#divCarrito").css("margin-top", 10);
+                    $("#divCarrito").css("position", "fixed");
+                } else {
+                    indice = indice + 30;
+                    var a = window.innerHeight - carritoHeight - 10;
+                    $("#divCarrito").css("margin-top", a + indice);
+                    $("#divCarrito").css("position", "fixed");
+                }
+
+
+            }
+            lastScrollTop = st;
+
+        });
+
+
+
+    </script>
+
+    <style>
+        #divCarrito{
+            width: 25%;
+            float:right;
+            margin: 20px;
+            margin-top:270px;
+            float:right;
+            right:0;
+            top:0;
+            margin-right: 4%;
+            position: absolute;
         }
-        lastScrollTop = st;  
-
-    });
-        
-        
-        
-</script>
-
-<style>
-    #divCarrito{
-    width: 25%;
-    float:right;
-    margin: 20px;
-    margin-top:270px;
-    float:right;
-    right:0;
-    top:0;
-    margin-right: 4%;
-    position: absolute;
-}
-</style>
+    </style>
