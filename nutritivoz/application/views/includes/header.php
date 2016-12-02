@@ -22,6 +22,8 @@
                             <span class="header-text-3">Fecha de entrega</span><BR/>
                             <span class="header-text-2"> <?php echo $zonaActual['fechaCierrePedidos'] ?></span>
                             <?php } ?>
+                            
+                         <BR/>   <a href='<?= base_url_control() ?>zona/zonas'>Cambiar Zona</a>
                 </div>
                 <div class="col-md-4">
                     <div class="middle-header-content">
