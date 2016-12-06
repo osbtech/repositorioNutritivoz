@@ -17,19 +17,26 @@ class Clientes_model extends CI_Model {
         $this->load->database();
     }
 
-    public function guardar_cliente($correo, $nombre, $celular, $fbId = '') {
+    public function guardar_cliente($correo, $nombre, $celular, $fbId, $idZona, $idLocalidad, $direccion, $dirAclaracion, $esquina1, $esquina2,$pass) {
         $data = array(
             'correo' => $correo,
             'nombre' => $nombre,
             'celular' => $celular,
-            'fbId' => $fbId
+            'fbId' => $fbId,
+            'idZona' => $idZona,
+            'idLocalidad' => $idLocalidad,
+            'direccion' => $direccion,
+            'direccion_aclaracion' => $dirAclaracion,
+            'esquina1' => $esquina1,
+            'esquina2' => $esquina2,
+            'password' => $pass
         );
         $this->db->insert('NUT_CLIENTES', $data);
         return $this->db->insert_id();
     }
 
-    public function actualizar_cliente($correo, $nombre, $celular, $fbId = '') {
-        return $this->db->simple_query("UPDATE NUT_CLIENTES SET nombre='" . $nombre . "',celular='" . $celular . "', fbId='" . $fbId . "' WHERE correo='" . $correo . "'");
+    public function actualizar_cliente($correo, $nombre, $celular, $fbId, $idZona, $idLocalidad, $direccion, $dirAclaracion, $esquina1, $esquina2) {
+        return $this->db->simple_query("UPDATE NUT_CLIENTES SET nombre='" . $nombre . "',celular='" . $celular . "', fbId='" . $fbId . "', idZona='" . $idZona . "', idLocalidad='" . $idLocalidad . "',direccion='" . $direccion . "', direccion_aclaracion='" . $dirAclaracion . "', esquina1 ='" . $esquina1 . "',esquina2='" . $esquina2 . "'  WHERE correo='" . $correo . "'");
     }
 
     public function actualizarPassword($correo, $password) {
@@ -47,6 +54,11 @@ class Clientes_model extends CI_Model {
 
     public function obtener_clienteByMail($email) {
         $query = $this->db->get_where('NUT_CLIENTES', array('correo' => $email));
+        return $query->row_array();
+    }
+
+    public function login_usuarios($correo, $password) {
+        $query = $this->db->get_where('NUT_CLIENTES', array('correo' => $correo, 'password' => $password));
         return $query->row_array();
     }
 

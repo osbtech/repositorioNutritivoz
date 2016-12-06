@@ -163,6 +163,8 @@ CREATE TABLE `nutrutivozosb`.`nut_zona_producto`(
   PRIMARY KEY (`idZona`, `idProducto`)
 );
 
+ALTER TABLE `nutrutivozosb`.`nut_localidad`   
+  CHANGE `idLocalidad` `idLocalidad` BIGINT(20) NOT NULL AUTO_INCREMENT;
 
 /* Agregado por Pablo Flores */
 INSERT INTO `nut_zona`  (`nombre`, `fechaProxEntrega`, `fechaCierrePedidos`) VALUES 
