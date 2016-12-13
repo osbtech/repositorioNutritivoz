@@ -3,7 +3,7 @@
 /**
  * Description of Carrito
  *
- * @author Juan Pablo p
+ * @author Juan Pablo 
  */
 class Carrito extends CI_Controller {
 
