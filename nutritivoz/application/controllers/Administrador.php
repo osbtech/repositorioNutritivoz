@@ -3,7 +3,7 @@
 /**
  * Description of Administrador
  *
- * @author Juan Pablo
+ * @author Juan Pablo sa
  */
 class Administrador extends CI_Controller {
 
