@@ -33,6 +33,8 @@ document.createElement('footer');
         <script src="<?= asset_url(); ?>js/bootstrap-number-input.js" ></script>
         <link rel="stylesheet" href="<?= asset_url(); ?>css/carrito.css">
         <!--<script src="<?= asset_url(); ?>js/carrito.js" ></script>-->
+        <script src="<?= asset_url(); ?>js/bootstrap-lightbox.min.js" ></script>
+         <link rel="stylesheet" href="<?= asset_url(); ?>css/bootstrap-lightbox.min.css">
         <link rel="icon" type="<?= asset_url(); ?>imag/png" href="<?= asset_url(); ?>img/favicon.png" />
 
         <!--Google Analytics-->
