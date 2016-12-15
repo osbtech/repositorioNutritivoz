@@ -98,13 +98,8 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
-<<<<<<< HEAD
 	'password' => 'osbtech',
-	'database' => 'nutrutivozosb',
-=======
-	'password' => 'dolphin2',
 	'database' => 'nutritivozosb',
->>>>>>> e745d7bb84596000533ff43f9b6586bb7cd56daf
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
