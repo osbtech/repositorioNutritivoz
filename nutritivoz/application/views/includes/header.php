@@ -18,13 +18,12 @@
                   <?php      
                     if (isset($_SESSION['zona'])) {
                          $zonaActual = ObtenerZonaAndHorarios($_SESSION['zona']);                       
-                         $this->load->view('includesZonas/'+ $zonaActual['include']  );
+                         $this->view('includesZonas/'+ $zonaActual['include']  );
                     }else {
-                         $this->load->view('includesZonas/zonaDefault'  );
+                         $this->view('includesZonas/zonaDefault'  );
                     }
                     ?>
-                </div>
-                        <a href='<?= base_url_control() ?>zona/zonas'>Cambiar Zona</a>
+                </div> 
             </div>
         </div>
     </div>
