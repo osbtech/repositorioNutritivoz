@@ -22,9 +22,7 @@ class Zona extends CI_Controller {
     public function zonas() {
         $this->load->view('includes/head');
         $this->load->view('includes/header');
-                $this->load->view('includes/loginLightbox');
         $this->load->view('productos/seleccionarZona');
-
         $this->load->view('includes/footer');
 
     }
