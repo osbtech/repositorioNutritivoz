@@ -98,7 +98,11 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
+<<<<<<< HEAD
 	'password' => 'Canela.962',
+=======
+	'password' => 'osbtech',
+>>>>>>> fa3f6ea296fb4906a84699924315bd5f697a9268
 	'database' => 'nutrutivozosb',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
