@@ -45,7 +45,8 @@ class Productos_model extends CI_Model {
       } */
 
     public function get_productosByCategoria($idZona) {
-        $query = $this->db->get('NUT_CATEGORIAS');
+        $query = $this->db->query('SELECT categoria.*  FROM nut_categorias categoria, nut_productos producto, nut_zona_producto zonaProducto WHERE categoria.idCategoria= producto.idCategoria AND producto.idProducto = zonaProducto.idProducto 
+        AND zonaProducto.idZona='. $idZona.' GROUP BY categoria.idCategoria');
         $categorias = $query->result_array();
         $resultado = array();
         foreach ($categorias as $categoria) {
