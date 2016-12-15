@@ -19,6 +19,9 @@
                     if (isset($_SESSION['zona'])) {
                          $zonaActual = ObtenerZonaAndHorarios($_SESSION['zona']);                       
                          $this->load->view('includesZonas/'+ $zonaActual['include']  );
+                    }else {
+                         $this->load->view('includesZonas/zonaDefault'  );
+                    }
                     ?>
 
                      
