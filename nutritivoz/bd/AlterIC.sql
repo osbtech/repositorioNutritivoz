@@ -8,10 +8,11 @@
  * Created: 29/11/2016
  */
 
-ALTER TABLE `nutrutivozosb`.`nut_pedidos`   
+ALTER TABLE `nutritivozosb`.`nut_pedidos`   
   ADD COLUMN `idZona` BIGINT(20) NOT NULL AFTER `esquina2`;
-ALTER TABLE `nutrutivozosb`.`nut_zona`   
+ALTER TABLE `nutritivozosb`.`nut_zona`   
   ADD COLUMN `include` VARCHAR(50) NOT NULL AFTER `fechaCierrePedidos`;
-ALTER TABLE `nutrutivozosb`.`nut_pedidos`   
+ALTER TABLE `nutritivozosb`.`nut_pedidos`   
   ADD COLUMN `idLocalidad` BIGINT(20) NOT NULL AFTER `idZona`;
+ALTER TABLE `nutritivozosb`.`nut_pedidos` DROP COLUMN zona;
 
