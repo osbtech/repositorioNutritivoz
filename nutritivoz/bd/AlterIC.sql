@@ -10,3 +10,5 @@
 
 ALTER TABLE `nutrutivozosb`.`nut_pedidos`   
   ADD COLUMN `idZona` BIGINT(20) NOT NULL AFTER `esquina2`;
+ALTER TABLE `nutrutivozosb`.`nut_zona`   
+  ADD COLUMN `include` VARCHAR(50) NOT NULL AFTER `fechaCierrePedidos`;
