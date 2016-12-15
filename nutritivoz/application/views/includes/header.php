@@ -23,8 +23,6 @@
                          $this->load->view('includesZonas/zonaDefault'  );
                     }
                     ?>
-
-                     
                 </div>
                         <a href='<?= base_url_control() ?>zona/zonas'>Cambiar Zona</a>
             </div>
