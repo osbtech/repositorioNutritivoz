@@ -116,65 +116,6 @@ class Listado_productos extends CI_Controller {
         }
     }
 
-    public function login() {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        if ($this->form_validation->run() === FALSE) {
-            $usuario = $this->clientes_model->login_usuarios($this->input->post('email'), $this->input->post('contrasena'));
-            if ($usuario == null) {
-                $this->session->set_flashdata('error', 'Usuario o contraseña incorrecta!');
-                redirect('listado_productos/listado_productos');
-            } else {
-                $data = array(
-                    'username' => $usuario['nombre'],
-                    'email' => $usuario['correo'],
-                    'idUsuario' => $usuario['idCliente'],
-                    'fbId' => $usuario['fbId']
-                );
-                $this->session->set_userdata($data);
-                redirect('listado_productos/listado_productos');
-            }
-        } else {
-            
-        }
-    }
-
- public function loginAjax() {
-        $usuario = $this->clientes_model->login_usuarios($this->input->post('correo'), $this->input->post('contrasena'));
-        if ($usuario == null) {
-            $ret['resultado'] = false;                
-        } else {
-            $data = array(
-                'username' => $usuario['nombre'],
-                'email' => $usuario['correo'],
-                'idUsuario' => $usuario['idCliente'],
-                'fbId' => $usuario['fbId']
-            );
-            $this->session->set_userdata($data);
-            $ret['resultado'] = true;
-        }
-        echo json_encode($ret);
-    }
-
-    public function logout() {
-        $this->session->unset_userdata(array('username', 'email', 'idUsuario','zona','log1','fbId'));
-        $this->logoutFB();
-        redirect('listado_productos/listado_productos');
-        //poner lo mismo en logout facebook
-    }
-
-    public function logoutFB() {
-        $this->load->library('facebook');
-
-        // Logs off session from website
-        $this->facebook->destroySession();
-        // Make sure you destory website session as well.
-
-        redirect('listado_productos/listado_productos');
-    }
-
     function rand_passwd($length = 8, $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') {
         return substr(str_shuffle($chars), 0, $length);
     }

@@ -29,7 +29,7 @@
                 }
                 if($this->session->userdata('log1')!="ok"){
                     $this->session->set_userdata('log1', 'ok');
-                    redirect('listado_productos/listado_productos');
+                    redirect($redirUrl);
                 }
             } catch (FacebookApiException $e) {
                 $user = null;
@@ -38,7 +38,7 @@
             
         }
         if ($user) {
-            $logout_url = site_url('listado_productos/logoutFB'); // Logs off application
+            $logout_url = site_url('login/logoutFB'); // Logs off application
         } else {
             $login_url = $CI->facebook->getLoginUrl(array(
                 'redirect_uri' => site_url($redirUrl),
@@ -60,7 +60,7 @@
         <?php } else { ?>
                 <div class="col-md-8"> 
                     <b><?= $this->session->userdata('username') ?></b>                        
-                    <a href="<?= base_url_control(); ?>listado_productos/logout" class="btn btn-sm btn-primary btn-block" role="button">Logout</a>  
+                    <a href="<?= base_url_control(); ?>login/logout" class="btn btn-sm btn-primary btn-block" role="button">Logout</a>  
                 </div>
         <?php } ?>
         
@@ -95,6 +95,9 @@
                     <input type="submit" class="form-control" value="Enviar"/>
                 </div>
             </form>
+            <div class="col-xs-8">
+            <a href="<?= site_url('login/cambiarContrasena') ?>" >Cambiar/recuperar contraseña</a>
+            </div>
             <?php if (!@$user_profile): ?>
                 <div class="col-xs-8">  
                     <a href="<?= $login_url ?>" class="btn btn-sm btn-primary btn-block" role="button">FB</a>
@@ -111,7 +114,7 @@
     $( "#loginForm" ).submit(function( event ) {
         event.preventDefault();
         $.ajax({
-            url: '<?= base_url_control() ?>/listado_productos/loginAjax',
+            url: '<?= base_url_control() ?>login/loginAjax',
             type: 'post',
             data: {
                 correo: $("#correou").val(),
