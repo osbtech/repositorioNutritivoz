@@ -38,7 +38,7 @@
             
         }
         if ($user) {
-            $logout_url = site_url('login/logoutFB'); // Logs off application
+            $logout_url = site_url('login/logout'); // Logs off application
         } else {
             $login_url = $CI->facebook->getLoginUrl(array(
                 'redirect_uri' => site_url($redirUrl),
