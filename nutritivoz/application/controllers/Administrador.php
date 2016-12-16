@@ -83,8 +83,10 @@ class Administrador extends CI_Controller {
         $this->form_validation->set_rules('zona', 'Zona', 'required');
 
         if ($this->form_validation->run() === FALSE) {
-            $data['categorias'] = $this->productos_model->get_productosByCategoria();
-            $data['pedido'] = $this->pedidos_model->getPedidos($idPedido);
+            $data['pedido'] = $this->pedidos_model->getPedidos($idPedido);   
+            $data['categorias'] = $this->productos_model->get_productosByCategoria($data['pedido']['idZona']);
+            $data['localidades'] = $this->zona_model->get_localidadesByZona($data['pedido']['idZona']);
+
             $detalles = $this->pedidos_model->getDetallePedidos($idPedido);
             $this->cargar_carrito($detalles);
             $this->load->view('includes/head');
