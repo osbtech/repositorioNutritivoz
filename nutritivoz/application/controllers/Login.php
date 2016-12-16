@@ -10,57 +10,40 @@ class Login extends CI_Controller {
 
         // To use site_url and redirect on this controller.
         $this->load->helper('url');
+        $this->load->model('clientes_model');
     }
 
-    public function login() {
-
-        $this->load->library('facebook'); // Automatically picks appId and secret from config
-        // OR
-        // You can pass different one like this
-        //$this->load->library('facebook', array(
-        //    'appId' => 'APP_ID',
-        //    'secret' => 'SECRET',
-        //    ));
-
-        $user = $this->facebook->getUser();
-
-        if ($user) {
-            try {
-                $data['user_profile'] = $this->facebook->api('/me?fields=name,email');
-                echo '<pre>';
-                print_r($data['user_profile']);
-            } catch (FacebookApiException $e) {
-                $user = null;
-            }
+ public function loginAjax() {
+        $usuario = $this->clientes_model->login_usuarios($this->input->post('correo'), $this->input->post('contrasena'));
+        if ($usuario == null) {
+            $ret['resultado'] = false;                
         } else {
-            // Solves first time login issue. (Issue: #10)
-            //$this->facebook->destroySession();
+            $data = array(
+                'username' => $usuario['nombre'],
+                'email' => $usuario['correo'],
+                'idUsuario' => $usuario['idCliente'],
+                'fbId' => $usuario['fbId']
+            );
+            $this->session->set_userdata($data);
+            $ret['resultado'] = true;
         }
-
-        if ($user) {
-
-            $data['logout_url'] = site_url('welcome/logout'); // Logs off application
-            // OR 
-            // Logs off FB!
-            // $data['logout_url'] = $this->facebook->getLogoutUrl();
-        } else {
-            $data['login_url'] = $this->facebook->getLoginUrl(array(
-                'redirect_uri' => site_url('welcome/login'),
-                'scope' => array('email') // permissions here
-            ));
-        }
-        $this->load->view('login', $data);
+        echo json_encode($ret);
     }
 
     public function logout() {
+        $this->session->unset_userdata(array('username', 'email', 'idUsuario','zona','log1','fbId'));
+        $this->logoutFB();
+        redirect('listado_productos/listado_productos');
+    }
 
+    public function logoutFB() {
         $this->load->library('facebook');
-
         // Logs off session from website
         $this->facebook->destroySession();
         // Make sure you destory website session as well.
-
-        redirect('welcome/login');
+        redirect('listado_productos/listado_productos');
     }
+
+
 
 }
