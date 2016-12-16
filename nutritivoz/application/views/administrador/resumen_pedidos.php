@@ -16,6 +16,7 @@
                     <th>Notas</th>
                     <th>Estado</th>
                     <th>Zona</th>
+                    <th>Localidad</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +33,7 @@
                         <td><?= $pedido['nota'] ?></td>
                         <td><?= $pedido['estado'] ?></td>
                         <td><?= $pedido['zona'] ?></td>
+                        <td><?= $pedido['localidad'] ?></td>
                     </tr>
                     <?php
                 }

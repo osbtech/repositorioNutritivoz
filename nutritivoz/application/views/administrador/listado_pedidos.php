@@ -11,6 +11,7 @@
                     <th>Cliente</th>
                     <th>Dirección</th>
                     <th>Zona</th>
+                    <th>Localidad</th>
                     <th>Teléfono</th>
                     <th>Importe</th>
                     <th>Estado</th>
