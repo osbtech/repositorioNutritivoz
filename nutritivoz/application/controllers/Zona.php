@@ -14,17 +14,16 @@
 class Zona extends CI_Controller {
 
     //put your code here
-    public function __construct() {
+public function __construct() {
         parent::__construct();
         $this->load->library('cart');
     }
-
+    
     public function zonas() {
         $this->load->view('includes/head');
         $this->load->view('includes/header');
         $this->load->view('productos/seleccionarZona');
         $this->load->view('includes/footer');
-
     }
 
     public function seleccionar_zona() {

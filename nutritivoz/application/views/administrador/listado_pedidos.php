@@ -26,6 +26,7 @@
                         <td><?= $pedido['nombre'] ?></td>
                         <td><?= $pedido['direccion'] ?></td>
                         <td><?= $pedido['zona'] ?></td>
+                        <td><?= $pedido['localidad'] ?></td>
                         <td><?= $pedido['celular'] ?></td>
                         <td><?= $pedido['total'] ?></td>
                         <td><?= $pedido['estado'] ?></td>

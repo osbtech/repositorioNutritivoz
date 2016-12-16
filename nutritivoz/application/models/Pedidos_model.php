@@ -25,12 +25,11 @@ class Pedidos_model extends CI_Model {
      * @param type $notaCliente
      * @param type $zona
      */
-    public function guardar_pedido($idCliente, $zona, $direccion, $aclaracionDir, $horario, $notaCliente, $subtotal, $costoEnvio, $total, $hash, $esquina1, $esquina2, $idZona, $idLocalidad) {
+    public function guardar_pedido($idCliente, $direccion, $aclaracionDir, $horario, $notaCliente, $subtotal, $costoEnvio, $total, $hash, $esquina1, $esquina2, $idZona, $idLocalidad) {
         $date = date('Y-m-d H:i:s');
         $data = array(
             'fecha_realizacion' => $date,
             'idCliente' => $idCliente,
-            'zona' => $zona,
             'direccion' => $direccion,
             'direccion_aclaracion' => $aclaracionDir,
             'horario' => $horario,
@@ -48,8 +47,8 @@ class Pedidos_model extends CI_Model {
         return $this->db->insert_id();
     }
 
-    public function actualizar_pedido($idPedido, $zona, $direccion, $aclaracionDir, $horario, $notaCliente, $subtotal, $costoEnvio, $total, $esquina1, $esquina2) {
-        $this->db->simple_query("UPDATE NUT_PEDIDOS SET  zona ='" . $zona . "', direccion='" . $direccion . "', direccion_aclaracion='" . $aclaracionDir . "', horario='" . $horario . "', nota_cliente='" . $notaCliente . "',subtotal='" . $subtotal . "', costo_envio='" . $costoEnvio . "', total='" . $total . "', esquina1='" . $esquina1 . "',esquina2='" . $esquina2 . "' WHERE idPedido='" . $idPedido . "'");
+    public function actualizar_pedido($idPedido, $direccion, $aclaracionDir, $horario, $notaCliente, $subtotal, $costoEnvio, $total, $esquina1, $esquina2) {
+        $this->db->simple_query("UPDATE NUT_PEDIDOS SET ', direccion='" . $direccion . "', direccion_aclaracion='" . $aclaracionDir . "', horario='" . $horario . "', nota_cliente='" . $notaCliente . "',subtotal='" . $subtotal . "', costo_envio='" . $costoEnvio . "', total='" . $total . "', esquina1='" . $esquina1 . "',esquina2='" . $esquina2 . "' WHERE idPedido='" . $idPedido . "'");
     }
 
     public function guardarDetallePedido($idPedido, $idProducto, $cantidad, $precio, $cantidad_entregada = 0, $cantidad_proveedor = 0) {
@@ -84,7 +83,7 @@ class Pedidos_model extends CI_Model {
       }
      */
 
-    const SQL_PEDIDOS = 'SELECT idPedido,c.idCliente, c.correo,c.nombre,c.celular,p.direccion_aclaracion aclaracion,p.nota_cliente nota,p.idPedido,p.fecha_realizacion,p.zona,p.direccion,p.subtotal,p.costo_envio,p.total,p.esquina1,p.esquina2,p.estado FROM NUT_PEDIDOS p,NUT_CLIENTES c WHERE p.idCliente=c.idCliente ';
+    const SQL_PEDIDOS = 'SELECT idPedido,c.idCliente, c.correo,c.nombre,c.celular,p.direccion_aclaracion aclaracion,p.nota_cliente nota,p.idPedido,p.fecha_realizacion,p.direccion,p.subtotal,p.costo_envio,p.total,p.esquina1,p.esquina2,p.estado, z.nombre zona, p.nombre localidad FROM NUT_PEDIDOS p,NUT_CLIENTES c, nut_zona z , nut_localidad  l WHERE p.idCliente=c.idCliente  AND p.idZona= z.IdZona  AND p.idLocalidad= l.idLocalidad';
 
     public function getPedidos($idPedido = false) {
         if ($idPedido) {
@@ -144,7 +143,7 @@ class Pedidos_model extends CI_Model {
         return $query->row_array();
     }
 
-    public function actualizar_pedidoAdm($idPedido, $idcliente, $fechaRealizacion, $fechaEntregaEstimada, $fechaEntrega, $zona, $direccion, $aclaracionDir, $notaCliente, $subtotal, $costoEnvio, $total, $esquina1, $esquina2, $estado, $notaPostVenta) {
+    public function actualizar_pedidoAdm($idPedido, $idcliente, $fechaRealizacion, $fechaEntregaEstimada, $fechaEntrega, $direccion, $aclaracionDir, $notaCliente, $subtotal, $costoEnvio, $total, $esquina1, $esquina2, $estado, $notaPostVenta) {
         $this->db->simple_query("UPDATE NUT_PEDIDOS SET idCliente='" . $idcliente . "', estado='" . $estado . "', fecha_realizacion='" . $fechaRealizacion . "', fecha_entrega_estimada='" . $fechaEntregaEstimada . "', fecha_entrega='" . $fechaEntrega . "', nota_postventa = '" . $notaPostVenta . "', zona ='" . $zona . "', direccion='" . $direccion . "', direccion_aclaracion='" . $aclaracionDir . "', nota_cliente='" . $notaCliente . "',subtotal='" . $subtotal . "', costo_envio='" . $costoEnvio . "', total='" . $total . "', esquina1='" . $esquina1 . "',esquina2='" . $esquina2 . "' WHERE idPedido='" . $idPedido . "'");
     }
 

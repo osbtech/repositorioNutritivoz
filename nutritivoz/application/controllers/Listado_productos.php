@@ -78,7 +78,7 @@ class Listado_productos extends CI_Controller {
                 $idCliente = $cliente['idCliente'];
                 $this->clientes_model->actualizar_cliente($this->input->post('correo'), $this->input->post('nombre'), (string) $this->input->post('celular'), $cliente['fbId'],$_SESSION['zona'], $this->input->post('localidad'), $this->input->post('direccion'), $this->input->post('aclDireccion'), $this->input->post('esquina1'), $this->input->post('esquina2'));
             }
-            $idPedido = $this->pedidos_model->guardar_pedido($idCliente, '', $this->input->post('direccion'), $this->input->post('aclDireccion'), '', $this->input->post('notas'), $this->cart->total(), calcularCostoEnvio($this->cart->total()), $this->cart->total() + calcularCostoEnvio($this->cart->total()), md5($idCliente + $this->cart->total()), $this->input->post('esquina1'), $this->input->post('esquina2'), $_SESSION['zona'], $this->input->post('localidad'));
+            $idPedido = $this->pedidos_model->guardar_pedido($idCliente, $this->input->post('direccion'), $this->input->post('aclDireccion'), '', $this->input->post('notas'), $this->cart->total(), calcularCostoEnvio($this->cart->total()), $this->cart->total() + calcularCostoEnvio($this->cart->total()), md5($idCliente + $this->cart->total()), $this->input->post('esquina1'), $this->input->post('esquina2'), $_SESSION['zona'], $this->input->post('localidad'));
             $datosEmail = array();
             $datosEmail['nombre'] = $this->input->post('nombre');
             $datosEmail['direccion'] = $this->input->post('direccion');
