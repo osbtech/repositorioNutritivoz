@@ -11,6 +11,7 @@ class Login extends CI_Controller {
         // To use site_url and redirect on this controller.
         $this->load->helper('url');
         $this->load->model('clientes_model');
+        $this->load->model('email_model');
     }
 
  public function loginAjax() {
@@ -50,7 +51,7 @@ public function cambiarContrasena(){
         if($cliente!=null){
             $hash= $this->clientes_model->agregar_cambio_contra($cliente['idCliente']);
             $datosEmail['usuario'] =$cliente['nombre'];
-            $datosEmail['link'] = site_url('login/cambioClave').'?q='.$hash;
+            $datosEmail['link'] = site_url('login/cambioClave').'/'.$hash;
             $this->email_model->enviar_mail('mail_templates/recuperar_contrasena', $cliente['correo'], $datosEmail, 'Nutritívoz - Alimentación saludable para todos', 'Cambio de contraseña');
              $ret['resultado'] = true; 
         }else{

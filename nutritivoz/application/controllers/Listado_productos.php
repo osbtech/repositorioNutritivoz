@@ -69,11 +69,15 @@ class Listado_productos extends CI_Controller {
             $idCliente = 0;
             $cliente = $this->clientes_model->obtener_clienteByMail($this->input->post('correo'));
             if ($cliente == null) {
-                $ps = $this->rand_passwd();
-                $idCliente = $this->clientes_model->guardar_cliente($this->input->post('correo'), $this->input->post('nombre'), (string) $this->input->post('celular'), '', $_SESSION['zona'], $this->input->post('localidad'), $this->input->post('direccion'), $this->input->post('aclDireccion'), $this->input->post('esquina1'), $this->input->post('esquina2'), $ps);
-                $data['contrasena'] = $ps;
-                $data['usuario'] = $this->input->post('correo');
-                $this->email_model->enviar_mail('mail_templates/cuenta_creada', $this->input->post('correo'), $data, "Cuenta creada", "Cuenta creada");
+                //$ps = $this->rand_passwd();
+                $idCliente = $this->clientes_model->guardar_cliente($this->input->post('correo'), $this->input->post('nombre'), (string) $this->input->post('celular'), '', $_SESSION['zona'], $this->input->post('localidad'), $this->input->post('direccion'), $this->input->post('aclDireccion'), $this->input->post('esquina1'), $this->input->post('esquina2'), "");
+                //$data['contrasena'] = $ps;
+                //$data['usuario'] = $this->input->post('correo');
+                //$this->email_model->enviar_mail('mail_templates/cuenta_creada', $this->input->post('correo'), $data, "Cuenta creada", "Cuenta creada");
+                $hash= $this->clientes_model->agregar_cambio_contra($idCliente );
+                $datosEmail['usuario'] =$this->input->post('nombre');
+                $datosEmail['link'] = site_url('login/cambioClave').'/'.$hash;
+                $this->email_model->enviar_mail('mail_templates/recuperar_contrasena', $this->input->post('correo'), $datosEmail, 'Nutritívoz - Alimentación saludable para todos', 'Cuenta creada!');
             } else {
                 $idCliente = $cliente['idCliente'];
                 $this->clientes_model->actualizar_cliente($this->input->post('correo'), $this->input->post('nombre'), (string) $this->input->post('celular'), $cliente['fbId'],$_SESSION['zona'], $this->input->post('localidad'), $this->input->post('direccion'), $this->input->post('aclDireccion'), $this->input->post('esquina1'), $this->input->post('esquina2'));
