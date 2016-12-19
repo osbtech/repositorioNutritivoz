@@ -2,7 +2,8 @@
 SQLyog Community v8.71 
 MySQL - 5.7.12-log : Database - nutrutivozosb
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 

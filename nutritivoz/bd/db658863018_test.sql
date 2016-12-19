@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `NUT_CATEGORIAS`
+-- Estructura de tabla para la tabla `nut_categorias`
 --
 
-CREATE TABLE IF NOT EXISTS `NUT_CATEGORIAS` (
+CREATE TABLE IF NOT EXISTS `nut_categorias` (
   `idCategoria` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) CHARACTER SET latin1 NOT NULL,
   `descripcion` varchar(1000) CHARACTER SET latin1 DEFAULT NULL,
@@ -35,10 +35,10 @@ CREATE TABLE IF NOT EXISTS `NUT_CATEGORIAS` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci AUTO_INCREMENT=7 ;
 
 --
--- Volcado de datos para la tabla `NUT_CATEGORIAS`
+-- Volcado de datos para la tabla `nut_categorias`
 --
 
-INSERT INTO `NUT_CATEGORIAS` (`idCategoria`, `nombre`, `descripcion`, `orden`) VALUES
+INSERT INTO `nut_categorias` (`idCategoria`, `nombre`, `descripcion`, `orden`) VALUES
 (1, 'Verduras orgánicas', 'Verduras frescas, recién cosechadas para maximizar su valor alimenticio', 1),
 (2, 'Frutas orgánicas', 'Frutas libres de pesticidas', 2),
 (3, 'Canastas orgánicas', 'Canastas de frutas y verduras preparadas, te resuelven el surtido de la semana', 3),
@@ -49,10 +49,10 @@ INSERT INTO `NUT_CATEGORIAS` (`idCategoria`, `nombre`, `descripcion`, `orden`) V
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `NUT_CLIENTES`
+-- Estructura de tabla para la tabla `nut_clientes`
 --
 
-CREATE TABLE IF NOT EXISTS `NUT_CLIENTES` (
+CREATE TABLE IF NOT EXISTS `nut_clientes` (
   `idCliente` bigint(20) NOT NULL AUTO_INCREMENT,
   `correo` varchar(200) CHARACTER SET latin1 NOT NULL,
   `nombre` varchar(50) CHARACTER SET latin1 NOT NULL,
@@ -69,10 +69,10 @@ CREATE TABLE IF NOT EXISTS `NUT_CLIENTES` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci AUTO_INCREMENT=8 ;
 
 --
--- Volcado de datos para la tabla `NUT_CLIENTES`
+-- Volcado de datos para la tabla `nut_clientes`
 --
 
-INSERT INTO `NUT_CLIENTES` (`idCliente`, `correo`, `nombre`, `celular`, `password`, `fbId`, `idZona`, `idLocalidad`, `direccion`, `direccion_aclaracion`, `esquina1`, `esquina2`) VALUES
+INSERT INTO `nut_clientes` (`idCliente`, `correo`, `nombre`, `celular`, `password`, `fbId`, `idZona`, `idLocalidad`, `direccion`, `direccion_aclaracion`, `esquina1`, `esquina2`) VALUES
 (2, 'pselectronico@gmail.com', 'Juan Pablo Salazar', '95464952', 'gXxORf4K', '', 1, 13, 'Av brasil 2420', 'Av brasil 2420', 'simon', 'simon'),
 (3, 'juancho5000salazar313@hotmail.com', 'Juan Pablo Salazar', '3054241363', '', '', 0, 0, '', '', '', ''),
 (6, 'pflores2@gmail.com', 'Pablo Flores Chiarelli', '98642046', '', '10154900845124994', 2, 71, 'Caramurú 5733', 'Caramurú 5733', 'María Espínola', 'Vicente Rocafuerte'),
@@ -81,10 +81,10 @@ INSERT INTO `NUT_CLIENTES` (`idCliente`, `correo`, `nombre`, `celular`, `passwor
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `NUT_CONFIG`
+-- Estructura de tabla para la tabla `nut_config`
 --
 
-CREATE TABLE IF NOT EXISTS `NUT_CONFIG` (
+CREATE TABLE IF NOT EXISTS `nut_config` (
   `FechaProxEntrega` date DEFAULT NULL,
   `FechaCierrePedidos` date DEFAULT NULL,
   `idConfig` int(11) NOT NULL AUTO_INCREMENT,
@@ -92,19 +92,19 @@ CREATE TABLE IF NOT EXISTS `NUT_CONFIG` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
 
 --
--- Volcado de datos para la tabla `NUT_CONFIG`
+-- Volcado de datos para la tabla `nut_config`
 --
 
-INSERT INTO `NUT_CONFIG` (`FechaProxEntrega`, `FechaCierrePedidos`, `idConfig`) VALUES
+INSERT INTO `nut_config` (`FechaProxEntrega`, `FechaCierrePedidos`, `idConfig`) VALUES
 ('2016-11-19', '2016-11-16', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `NUT_LOCALIDAD`
+-- Estructura de tabla para la tabla `nut_localidad`
 --
 
-CREATE TABLE IF NOT EXISTS `NUT_LOCALIDAD` (
+CREATE TABLE IF NOT EXISTS `nut_localidad` (
   `idLocalidad` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) COLLATE latin1_general_ci NOT NULL,
   `departamento` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
@@ -113,10 +113,10 @@ CREATE TABLE IF NOT EXISTS `NUT_LOCALIDAD` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=72 ;
 
 --
--- Volcado de datos para la tabla `NUT_LOCALIDAD`
+-- Volcado de datos para la tabla `nut_localidad`
 --
 
-INSERT INTO `NUT_LOCALIDAD` (`idLocalidad`, `nombre`, `departamento`, `idZona`) VALUES
+INSERT INTO `nut_localidad` (`idLocalidad`, `nombre`, `departamento`, `idZona`) VALUES
 (1, 'Aguada', 'Montevideo', 1),
 (2, 'Aires Puros', 'Montevideo', 1),
 (3, 'Atahualpa', 'Montevideo', 1),
@@ -192,10 +192,10 @@ INSERT INTO `NUT_LOCALIDAD` (`idLocalidad`, `nombre`, `departamento`, `idZona`) 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `NUT_MARCAS`
+-- Estructura de tabla para la tabla `nut_marcas`
 --
 
-CREATE TABLE IF NOT EXISTS `NUT_MARCAS` (
+CREATE TABLE IF NOT EXISTS `nut_marcas` (
   `idMarca` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) CHARACTER SET latin1 NOT NULL,
   `idProveedor` bigint(20) NOT NULL,
@@ -203,10 +203,10 @@ CREATE TABLE IF NOT EXISTS `NUT_MARCAS` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci AUTO_INCREMENT=10 ;
 
 --
--- Volcado de datos para la tabla `NUT_MARCAS`
+-- Volcado de datos para la tabla `nut_marcas`
 --
 
-INSERT INTO `NUT_MARCAS` (`idMarca`, `nombre`, `idProveedor`) VALUES
+INSERT INTO `nut_marcas` (`idMarca`, `nombre`, `idProveedor`) VALUES
 (1, '34 Sur', 1),
 (2, 'Importadas', 1),
 (3, 'Campo Claro', 2),
@@ -220,10 +220,10 @@ INSERT INTO `NUT_MARCAS` (`idMarca`, `nombre`, `idProveedor`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `NUT_PEDIDOS`
+-- Estructura de tabla para la tabla `nut_pedidos`
 --
 
-CREATE TABLE IF NOT EXISTS `NUT_PEDIDOS` (
+CREATE TABLE IF NOT EXISTS `nut_pedidos` (
   `idPedido` bigint(20) NOT NULL AUTO_INCREMENT,
   `fecha_realizacion` datetime NOT NULL,
   `fecha_entrega_estimada` date NOT NULL,
@@ -248,10 +248,10 @@ CREATE TABLE IF NOT EXISTS `NUT_PEDIDOS` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci AUTO_INCREMENT=9 ;
 
 --
--- Volcado de datos para la tabla `NUT_PEDIDOS`
+-- Volcado de datos para la tabla `nut_pedidos`
 --
 
-INSERT INTO `NUT_PEDIDOS` (`idPedido`, `fecha_realizacion`, `fecha_entrega_estimada`, `fecha_entrega`, `idCliente`, `zona`, `direccion`, `direccion_aclaracion`, `horario`, `nota_cliente`, `nota_postventa`, `subtotal`, `costo_envio`, `total`, `estado`, `hash`, `esquina1`, `esquina2`, `idZona`, `idLocalidad`) VALUES
+INSERT INTO `nut_pedidos` (`idPedido`, `fecha_realizacion`, `fecha_entrega_estimada`, `fecha_entrega`, `idCliente`, `zona`, `direccion`, `direccion_aclaracion`, `horario`, `nota_cliente`, `nota_postventa`, `subtotal`, `costo_envio`, `total`, `estado`, `hash`, `esquina1`, `esquina2`, `idZona`, `idLocalidad`) VALUES
 (5, '2016-12-02 16:58:23', '0000-00-00', '0000-00-00', 3, '', '7273 NW 12th St, Suite UY-27822', '7273 NW 12th St', '', 'n1n1', '', '140.00', '0.00', '140.00', 'INICIADO', '903ce9225fca3e988c2af215d4e544d3', 'obligado', 'simon1', 2, 71),
 (6, '2016-12-09 11:25:22', '0000-00-00', NULL, 6, '', 'Caramurú 5733', '', '', '', NULL, '105.00', '0.00', '105.00', 'INICIADO', '698d51a19d8a121ce581499d7b701668', 'María Espínola', 'Vicente Rocafuerte', 1, 54),
 (7, '2016-12-09 12:06:06', '0000-00-00', NULL, 6, '', 'Caramurú 5733', 'Caramurú 5733', '', '', NULL, '120.00', '0.00', '120.00', 'INICIADO', '069059b7ef840f0c74a814ec9237b6ec', 'María Espínola', 'Vicente Rocafuerte', 2, 71),
@@ -261,10 +261,10 @@ INSERT INTO `NUT_PEDIDOS` (`idPedido`, `fecha_realizacion`, `fecha_entrega_estim
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `NUT_PEDIDOS_DETALLE`
+-- Estructura de tabla para la tabla `nut_pedidos_detalle`
 --
 
-CREATE TABLE IF NOT EXISTS `NUT_PEDIDOS_DETALLE` (
+CREATE TABLE IF NOT EXISTS `nut_pedidos_detalle` (
   `idPedidoDetalle` bigint(20) NOT NULL AUTO_INCREMENT,
   `idPedido` bigint(20) NOT NULL,
   `idProducto` bigint(20) NOT NULL,
@@ -276,10 +276,10 @@ CREATE TABLE IF NOT EXISTS `NUT_PEDIDOS_DETALLE` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci AUTO_INCREMENT=19 ;
 
 --
--- Volcado de datos para la tabla `NUT_PEDIDOS_DETALLE`
+-- Volcado de datos para la tabla `nut_pedidos_detalle`
 --
 
-INSERT INTO `NUT_PEDIDOS_DETALLE` (`idPedidoDetalle`, `idPedido`, `idProducto`, `cantidad`, `cantidad_entregada`, `precio`, `cantidad_proveedor`) VALUES
+INSERT INTO `nut_pedidos_detalle` (`idPedidoDetalle`, `idPedido`, `idProducto`, `cantidad`, `cantidad_entregada`, `precio`, `cantidad_proveedor`) VALUES
 (1, 1, 2, '2.00', '2.00', '50', '2.00'),
 (2, 2, 2, '2.00', '2.00', '50', '2.00'),
 (3, 3, 2, '2.00', '2.00', '50', '2.00'),
@@ -296,10 +296,10 @@ INSERT INTO `NUT_PEDIDOS_DETALLE` (`idPedidoDetalle`, `idPedido`, `idProducto`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `NUT_PRODUCTOS`
+-- Estructura de tabla para la tabla `nut_productos`
 --
 
-CREATE TABLE IF NOT EXISTS `NUT_PRODUCTOS` (
+CREATE TABLE IF NOT EXISTS `nut_productos` (
   `idProducto` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) CHARACTER SET latin1 NOT NULL,
   `descripcion` varchar(10000) CHARACTER SET latin1 DEFAULT NULL,
@@ -315,10 +315,10 @@ CREATE TABLE IF NOT EXISTS `NUT_PRODUCTOS` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci AUTO_INCREMENT=538 ;
 
 --
--- Volcado de datos para la tabla `NUT_PRODUCTOS`
+-- Volcado de datos para la tabla `nut_productos`
 --
 
-INSERT INTO `NUT_PRODUCTOS` (`idProducto`, `nombre`, `descripcion`, `idCategoria`, `idMarca`, `unidad`, `precio`, `costo`, `iva`, `activo`, `stock`) VALUES
+INSERT INTO `nut_productos` (`idProducto`, `nombre`, `descripcion`, `idCategoria`, `idMarca`, `unidad`, `precio`, `costo`, `iva`, `activo`, `stock`) VALUES
 (1, 'Acelga Verde', NULL, 1, 1, 'atado', '35', '28.00', 0, b'1', 15),
 (2, 'Acelga Tallo Amarillo', NULL, 1, 1, 'atado', '25', '28.00', 0, b'1', 15),
 (3, 'Apio de hoja', NULL, 1, 1, 'atado', '35', '28.00', 0, b'1', 15),
@@ -860,20 +860,20 @@ INSERT INTO `NUT_PRODUCTOS` (`idProducto`, `nombre`, `descripcion`, `idCategoria
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `NUT_PROVEEDORES`
+-- Estructura de tabla para la tabla `nut_proveedores`
 --
 
-CREATE TABLE IF NOT EXISTS `NUT_PROVEEDORES` (
+CREATE TABLE IF NOT EXISTS `nut_proveedores` (
   `idProveedor` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`idProveedor`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci AUTO_INCREMENT=7 ;
 
 --
--- Volcado de datos para la tabla `NUT_PROVEEDORES`
+-- Volcado de datos para la tabla `nut_proveedores`
 --
 
-INSERT INTO `NUT_PROVEEDORES` (`idProveedor`, `nombre`) VALUES
+INSERT INTO `nut_proveedores` (`idProveedor`, `nombre`) VALUES
 (1, '34 Sur'),
 (2, 'Feral'),
 (3, 'Graneco'),
@@ -884,10 +884,10 @@ INSERT INTO `NUT_PROVEEDORES` (`idProveedor`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `NUT_ZONA`
+-- Estructura de tabla para la tabla `nut_zona`
 --
 
-CREATE TABLE IF NOT EXISTS `NUT_ZONA` (
+CREATE TABLE IF NOT EXISTS `nut_zona` (
   `idZona` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) COLLATE latin1_general_ci NOT NULL,
   `fechaProxEntrega` datetime NOT NULL,
@@ -896,30 +896,30 @@ CREATE TABLE IF NOT EXISTS `NUT_ZONA` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `NUT_ZONA`
+-- Volcado de datos para la tabla `nut_zona`
 --
 
-INSERT INTO `NUT_ZONA` (`idZona`, `nombre`, `fechaProxEntrega`, `fechaCierrePedidos`) VALUES
+INSERT INTO `nut_zona` (`idZona`, `nombre`, `fechaProxEntrega`, `fechaCierrePedidos`) VALUES
 (1, 'Montevideo', '2016-12-03 15:06:41', '2016-11-30 15:06:52'),
 (2, 'Punta del Este', '2016-12-08 15:10:01', '2016-12-05 15:10:06');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `NUT_ZONA_PRODUCTO`
+-- Estructura de tabla para la tabla `nut_zona_producto`
 --
 
-CREATE TABLE IF NOT EXISTS `NUT_ZONA_PRODUCTO` (
+CREATE TABLE IF NOT EXISTS `nut_zona_producto` (
   `idZona` bigint(20) NOT NULL,
   `idProducto` bigint(20) NOT NULL,
   PRIMARY KEY (`idZona`,`idProducto`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Volcado de datos para la tabla `NUT_ZONA_PRODUCTO`
+-- Volcado de datos para la tabla `nut_zona_producto`
 --
 
-INSERT INTO `NUT_ZONA_PRODUCTO` (`idZona`, `idProducto`) VALUES
+INSERT INTO `nut_zona_producto` (`idZona`, `idProducto`) VALUES
 (1, 1),
 (1, 2),
 (1, 3),

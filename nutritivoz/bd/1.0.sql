@@ -2,7 +2,8 @@
 SQLyog Community v8.71 
 MySQL - 5.5.49-cll-lve : Database - nutritivozOSB
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -16,11 +17,11 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`nutritivozOSB` /*!40100 DEFAULT CHARACT
 
 USE `nutritivozOSB`;
 
-/*Table structure for table `NUT_CATEGORIAS` */
+/*Table structure for table `nut_categorias` */
 
-DROP TABLE IF EXISTS `NUT_CATEGORIAS`;
+DROP TABLE IF EXISTS `nut_categorias`;
 
-CREATE TABLE `NUT_CATEGORIAS` (
+CREATE TABLE `nut_categorias` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) CHARACTER SET latin1 NOT NULL,
   `descripcion` varchar(1000) CHARACTER SET latin1 DEFAULT NULL,
@@ -28,15 +29,15 @@ CREATE TABLE `NUT_CATEGORIAS` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
-/*Data for the table `NUT_CATEGORIAS` */
+/*Data for the table `nut_categorias` */
 
-insert  into `NUT_CATEGORIAS`(`id`,`nombre`,`descripcion`,`orden`) values (1,'Verduras orgánicas','Verduras frescas, recién cosechadas para maximizar su valor alimenticio',1),(2,'Frutas orgánicas','Frutas libres de pesticidas',2);
+insert  into `nut_categorias`(`id`,`nombre`,`descripcion`,`orden`) values (1,'Verduras orgánicas','Verduras frescas, recién cosechadas para maximizar su valor alimenticio',1),(2,'Frutas orgánicas','Frutas libres de pesticidas',2);
 
-/*Table structure for table `NUT_CLIENTES` */
+/*Table structure for table `nut_clientes` */
 
-DROP TABLE IF EXISTS `NUT_CLIENTES`;
+DROP TABLE IF EXISTS `nut_clientes`;
 
-CREATE TABLE `NUT_CLIENTES` (
+CREATE TABLE `nut_clientes` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `correo` varchar(200) CHARACTER SET latin1 NOT NULL,
   `nombre` varchar(50) CHARACTER SET latin1 NOT NULL,
@@ -44,7 +45,7 @@ CREATE TABLE `NUT_CLIENTES` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
-/*Data for the table `NUT_CLIENTES` */
+/*Data for the table `nut_clientes` */
 
 /*Table structure for table `NUT_ESTADOSPEDIDO` */
 
@@ -58,24 +59,24 @@ CREATE TABLE `NUT_ESTADOSPEDIDO` (
 
 /*Data for the table `NUT_ESTADOSPEDIDO` */
 
-/*Table structure for table `NUT_MARCAS` */
+/*Table structure for table `nut_marcas` */
 
-DROP TABLE IF EXISTS `NUT_MARCAS`;
+DROP TABLE IF EXISTS `nut_marcas`;
 
-CREATE TABLE `NUT_MARCAS` (
+CREATE TABLE `nut_marcas` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) CHARACTER SET latin1 NOT NULL,
   `proveedor_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
-/*Data for the table `NUT_MARCAS` */
+/*Data for the table `nut_marcas` */
 
-/*Table structure for table `NUT_PEDIDOS` */
+/*Table structure for table `nut_pedidos` */
 
-DROP TABLE IF EXISTS `NUT_PEDIDOS`;
+DROP TABLE IF EXISTS `nut_pedidos`;
 
-CREATE TABLE `NUT_PEDIDOS` (
+CREATE TABLE `nut_pedidos` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `fecha_realizacion` datetime NOT NULL,
   `fecha_entrega_estimada` date NOT NULL,
@@ -94,13 +95,13 @@ CREATE TABLE `NUT_PEDIDOS` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
-/*Data for the table `NUT_PEDIDOS` */
+/*Data for the table `nut_pedidos` */
 
-/*Table structure for table `NUT_PEDIDOS_DETALLE` */
+/*Table structure for table `nut_pedidos_detalle` */
 
-DROP TABLE IF EXISTS `NUT_PEDIDOS_DETALLE`;
+DROP TABLE IF EXISTS `nut_pedidos_detalle`;
 
-CREATE TABLE `NUT_PEDIDOS_DETALLE` (
+CREATE TABLE `nut_pedidos_detalle` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `pedido_id` bigint(20) NOT NULL,
   `producto_id` bigint(20) NOT NULL,
@@ -109,13 +110,13 @@ CREATE TABLE `NUT_PEDIDOS_DETALLE` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
-/*Data for the table `NUT_PEDIDOS_DETALLE` */
+/*Data for the table `nut_pedidos_detalle` */
 
-/*Table structure for table `NUT_PRODUCTOS` */
+/*Table structure for table `nut_productos` */
 
-DROP TABLE IF EXISTS `NUT_PRODUCTOS`;
+DROP TABLE IF EXISTS `nut_productos`;
 
-CREATE TABLE `NUT_PRODUCTOS` (
+CREATE TABLE `nut_productos` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) CHARACTER SET latin1 NOT NULL,
   `descripcion` varchar(1000) CHARACTER SET latin1 DEFAULT NULL,
@@ -129,19 +130,19 @@ CREATE TABLE `NUT_PRODUCTOS` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
-/*Data for the table `NUT_PRODUCTOS` */
+/*Data for the table `nut_productos` */
 
-/*Table structure for table `NUT_PROVEEDORES` */
+/*Table structure for table `nut_proveedores` */
 
-DROP TABLE IF EXISTS `NUT_PROVEEDORES`;
+DROP TABLE IF EXISTS `nut_proveedores`;
 
-CREATE TABLE `NUT_PROVEEDORES` (
+CREATE TABLE `nut_proveedores` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
-/*Data for the table `NUT_PROVEEDORES` */
+/*Data for the table `nut_proveedores` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -96,7 +96,7 @@
                 </div>
             </form>
             <div class="col-xs-8">
-            <a href="<?= site_url('login/cambiarContrasena') ?>" >Cambiar/recuperar contraseña</a>
+            <a id="btnActivar" href="<?= site_url('login/cambiarContrasena') ?>" >Cambiar/recuperar contraseña</a>
             </div>
             <?php if (!@$user_profile): ?>
                 <div class="col-xs-8">  
@@ -104,15 +104,58 @@
                 </div>
             <?php endif; ?>
          </div>
+         <br>
+         <div class="row" id="cambiarContrasena">
+            <form id="CambioForm">
+                <div class="col-xs-8">
+                    <span id="msgCambio"></span>
+                </div> 
+                <div class="col-xs-8"> 
+                    <label class="col-xs-4 col-md-4 control-label">Email</label>
+                </div>
+                <div class="col-xs-8"> 
+                    <input type="email" class="form-control" name="mailCambio" id="mailCambio" required />
+                </div>
+                <div class="col-xs-8">
+                    <input type="button" id="cambiarBtn" class="form-control" value="Enviar"/>
+                </div>
+            </form>
+         </div>
     </div>
     <script>
-    $('#btnLogin').click(function (e) {
+    $("#cambiarContrasena").hide();
+
+    $('#btnActivar').click(function(){
+        $("#cambiarContrasena").show();
+        return false;
+    });
+
+    $('#btnLogin').click(function () {
 		$('#basic-modal-content').modal();
 		return false;
 	});
 
-    $( "#loginForm" ).submit(function( event ) {
-        event.preventDefault();
+    $("#cambiarBtn").click(function(){
+        $.ajax({
+            url: '<?= site_url('login/cambiarContrasena') ?>',
+            type: 'post',
+            data: {
+                correo: $("#mailCambio").val()
+            },
+            dataType: 'html',
+            success: function (data) {
+                var result = jQuery.parseJSON(data);
+                if(result.resultado){
+                    $("#msgCambio").text("po favor revisa el correo indicado para cambiar la contrasena.");
+                }else{
+                    $("#msgCambio").text("No se encontro el correo indicado.");
+                }
+            }
+        });
+        return false;
+    });
+
+    $( "#loginForm" ).submit(function() {
         $.ajax({
             url: '<?= base_url_control() ?>login/loginAjax',
             type: 'post',
@@ -123,14 +166,13 @@
             dataType: 'html',
             success: function (data) {
                 var result = jQuery.parseJSON(data);
-                console.log(result);
                 if(result.resultado){
                      location.reload();
                 }else{
                     $("#msgError").text("Error en usuario o contraseña!");
                 }
             }
-        });
-        
+        });   
+        return false;     
     });    
     </script>
