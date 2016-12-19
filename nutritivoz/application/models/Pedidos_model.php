@@ -144,7 +144,7 @@ class Pedidos_model extends CI_Model {
     }
 
     public function actualizar_pedidoAdm($idPedido, $idcliente, $fechaRealizacion, $fechaEntregaEstimada, $fechaEntrega, $direccion, $aclaracionDir, $notaCliente, $subtotal, $costoEnvio, $total, $esquina1, $esquina2, $estado, $notaPostVenta) {
-        $this->db->simple_query("UPDATE nut_pedidos SET idCliente='" . $idcliente . "', estado='" . $estado . "', fecha_realizacion='" . $fechaRealizacion . "', fecha_entrega_estimada='" . $fechaEntregaEstimada . "', fecha_entrega='" . $fechaEntrega . "', nota_postventa = '" . $notaPostVenta . "', zona ='" . $zona . "', direccion='" . $direccion . "', direccion_aclaracion='" . $aclaracionDir . "', nota_cliente='" . $notaCliente . "',subtotal='" . $subtotal . "', costo_envio='" . $costoEnvio . "', total='" . $total . "', esquina1='" . $esquina1 . "',esquina2='" . $esquina2 . "' WHERE idPedido='" . $idPedido . "'");
+        $this->db->simple_query("UPDATE NUT_PEDIDOS SET idCliente='" . $idcliente . "', estado='" . $estado . "', fecha_realizacion='" . $fechaRealizacion . "', fecha_entrega_estimada='" . $fechaEntregaEstimada . "', fecha_entrega='" . $fechaEntrega . "', nota_postventa = '" . $notaPostVenta . "', direccion='" . $direccion . "', direccion_aclaracion='" . $aclaracionDir . "', nota_cliente='" . $notaCliente . "',subtotal='" . $subtotal . "', costo_envio='" . $costoEnvio . "', total='" . $total . "', esquina1='" . $esquina1 . "',esquina2='" . $esquina2 . "' WHERE idPedido='" . $idPedido . "'");
     }
 
     public function quitarProductoPedidos($idProducto) {

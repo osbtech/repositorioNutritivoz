@@ -19,8 +19,8 @@ function calcularCostoEnvio($total) {
    if (isset($_SESSION['zona'])) {
    switch ($_SESSION['zona']) {
        case '1':
-                if ($total <= 500) {
-                    return 100;
+        if ($total <= 500) {
+                    return 100;     
                 } else if (($total > 500) && ($total <= 1000)) {
                     return 50;
                 } else if ($total > 1000) {
@@ -35,6 +35,7 @@ function calcularCostoEnvio($total) {
                 } else if ($total > 1000) {
                     return 0;
                 }
+            
            break;
        default:
            

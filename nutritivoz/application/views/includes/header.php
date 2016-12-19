@@ -17,7 +17,7 @@
                 <div class="col-md-4">
                   <?php      
                     if (isset($_SESSION['zona'])) {
-                         $zonaActual = ObtenerZonaAndHorarios($_SESSION['zona']);      
+                         $zonaActual = ObtenerZonaAndHorarios($_SESSION['zona']);         
                          $this->view('includesZonas/' . $zonaActual['include']);
                     }else {
                          $this->view('includesZonas/zonaDefault');
