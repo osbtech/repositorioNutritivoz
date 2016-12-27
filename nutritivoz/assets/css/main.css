@@ -67,6 +67,7 @@ textarea {
     max-width: 1024px;
     margin: 0 auto;
     display: block;
+    text-align: center;
 }
 
 /*help style*/
@@ -174,10 +175,19 @@ header {
     font: normal 14px"dejavu_sansextralight", Arial, helvetica, sans-serif;
     font-weight: bold;
 }
+
+.header-text-2 > a {
+    color: #B3A633;
+}
+
+
 .header-text-3 {
     color: #fff;
     font: normal 13px"dejavu_sansextralight", Arial, helvetica, sans-serif;
+}
 
+.header-text-3 > a {
+    color: #B3A633;
 }
 
 .head-lista-precios {

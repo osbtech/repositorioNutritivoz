@@ -22,6 +22,7 @@ class Listado_productos extends CI_Controller {
         $this->pedidos_model->confirmar_pedido($hash);
         $data['titulo'] = "¡Muchas gracias!";
         $data['mensaje'] = "Su pedido está confirmado y será procesado a partir de este momento.";
+        $data['immagen'] = "carrito.png";
         $this->load->view('includes/head');
         $this->load->view('includes/header');
         $this->load->view('productos/confirmacion', $data);
@@ -153,6 +154,7 @@ class Listado_productos extends CI_Controller {
             $this->cart->destroy();
             $data['titulo'] = "Ya casi estamos";
             $data['mensaje'] = "Para confirmar el pedido por favor revisa tu correo electrónico.";
+            $data['imagen'] = "img/smartphone.png";
             $this->load->view('includes/head');
             $this->load->view('includes/header');
             $this->load->view('productos/confirmacion', $data);

@@ -212,6 +212,89 @@ class Reportes_pdf extends CI_Controller {
 		
 		$this->pdf->Output("Lista de pedidos.pdf", 'I');
     }	
+
+	function etiqueta ($idPedido, $producto, $unidades) {
+
+		if ($this->col == 1) {
+			if ($this->line == 12) {
+				$this->pdf->AddPage();
+				$this->pdf->SetY(0);
+				$this->line = 1;
+			}
+
+			$this->pdf->Ln(13.7);
+			$this->pdf->SetX(10);
+			$this->col = 2;
+		} else {
+		
+			$this->pdf->SetY($this->pdf->GetY()-12);
+			
+			if ($this->col == 2) {
+				$this->pdf->SetX(76);
+				$this->col = 3;
+			} else {
+				$this->pdf->SetX(143);
+				$this->col = 1;
+				$this->line++;
+			}
+
+
+		}
+		
+		$this->pdf->SetFont('Arial', '', 24);
+		$this->pdf->Cell(20,12,$idPedido);
+
+		$this->pdf->SetFont('Arial', '', 10);
+		$this->pdf->MultiCell(50,6,t($producto). "\n" .t($unidades));
+
+	}
+	
+
+    public function etiquetasPedidos($idProveedor){
+		// Se obtienen los alumnos de la base de datos
+		$pedidos = $this->pedidos_model->getItemsPedidos($idProveedor);
+		
+		if (empty($pedidos)) {
+			printf('No hay pedidos');
+			return;
+		}
+
+		$this->load->library('pdf');
+		$this->pdf = new Pdf();
+		$this->pdf->AddPage();
+		$this->pdf->AliasNbPages();
+	 
+		$this->pdf->SetTitle("Detalle de pedidos");
+		$this->pdf->SetLeftMargin(10);
+		$this->pdf->SetRightMargin(10);
+		$this->pdf->SetAutoPageBreak(false);
+		$this->pdf->SetY(0);
+		
+		$this->col = 1;
+		$this->line =1;
+
+		foreach ($pedidos as $p) {
+			
+			if ($p['unidad'] != 'Kg'){
+				for ($i=1; $i<=$p['cantidad']; $i++) {
+					if ($p['cantidad']==1) { 
+						$unidades = '1 '.$p['unidad'];
+					} else {
+						$unidades = $p['unidad']. ' '. $i .' / '. round($p['cantidad']) ;
+					}
+					$this->etiqueta($p['idPedido'], $p['nombre'], $unidades);
+					
+				}
+			} else {
+				$this->etiqueta($p['idPedido'], $p['nombre'], (($p['cantidad'] == $c2=round($p['cantidad'])) ? $c2:$p['cantidad']).' '.$p['unidad']);				
+			}
+						
+		}
+		
+		$this->pdf->Output("Etiquetas de pedidos.pdf", 'I');
+    }	
+
+	
 	
 	
 	public function proveedor($idProveedor){

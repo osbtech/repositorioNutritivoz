@@ -9,7 +9,7 @@
         </div>
         <div class="box-footer">
             <div class="date">
-                <span>25 de Mayo 745, Montevideo, Uruguay.</span>
+                <span>Pablo de María 1220, Montevideo, Uruguay.</span>
             </div>
             <div class="social-networks">
                 <ul>

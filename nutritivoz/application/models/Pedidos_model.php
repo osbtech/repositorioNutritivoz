@@ -125,6 +125,18 @@ class Pedidos_model extends CI_Model {
         $query = $this->db->query($str2);
         return $query->result_array();
     }
+	
+	
+	 public function getItemsPedidos($idProveedor = false) {
+        $str = 'SELECT p.idProducto,p.nombre,p.unidad,m.nombre marca,pd.cantidad_proveedor cantidad, ped.idPedido '.
+				'FROM NUT_PEDIDOS_DETALLE pd,NUT_PRODUCTOS p,NUT_MARCAS m, NUT_PROVEEDORES pv, NUT_PEDIDOS ped '.
+				'WHERE pd.idProducto = p.idProducto AND m.idMarca=p.idMarca AND m.idProveedor=pv.idProveedor AND ped.idPedido = pd.idPedido AND '.
+				'pv.idProveedor=' . $idProveedor . " AND ped.estado = 'CONFIRMADO' ".
+				'ORDER BY ped.idPedido, p.nombre';
+        $query = $this->db->query($str);
+        return $query->result_array();
+    }
+	
 
     public function getPedidosCompleto($idPedido = FALSE) {
         if ($idPedido === FALSE) {

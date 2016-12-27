@@ -280,12 +280,12 @@
                 html += '<tr>' +
                         '<td><input class="form-control cant rinput" type="text" data-idProducto="' + item.id + '" value="' + item.qty + '" name="namei' + item.id + '" /></td>' +
                         '<td><label><strong>' + item.name + '</strong></label></td>' +
-                        '<td class="tdRight"><label>$' + (item.price * item.qty) + '</label></td>' +
+                        '<td class="tdRight"><label>$' + Math.round(item.price * item.qty) + '</label></td>' +
                         '</tr>';
             });
             $('#carritoItems').append(html);
             $('.cenvio').text('$' + envio);
-            $('.ctotal').text('$' + (total + envio));
+            $('.ctotal').text('$' + Math.round(total + envio));
             if (total == 0) {
                 $('#btnEnviarPedido').attr('disabled', 'disabled');
             } else {
