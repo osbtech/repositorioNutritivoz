@@ -34,7 +34,7 @@ document.createElement('footer');
         <link rel="stylesheet" href="<?= asset_url(); ?>css/carrito.css">
         <!--<script src="<?= asset_url(); ?>js/carrito.js" ></script>-->
         <script src="<?= asset_url(); ?>js/jquery.simplemodal.js" ></script>
-         <link rel="stylesheet" href="<?= asset_url(); ?>css/basic.css">
+         <link rel="stylesheet" href="<?= asset_url(); ?>css/login.css">
         <link rel="icon" type="<?= asset_url(); ?>imag/png" href="<?= asset_url(); ?>img/favicon.png" />
 
         <!--Google Analytics-->

@@ -18,16 +18,16 @@ class Config_model extends CI_Model {
     }
 
     public function getFechas() {
-        $query = $this->db->get('NUT_CONFIG');
+        $query = $this->db->get('nut_config');
         return $query->result_array()[0];
     }    
     
     public function setProxEntrega($fecha)  {
-        $this->db->simple_query("UPDATE NUT_CONFIG SET FechaProxEntrega='".$fecha."' WHERE idConfig='1'");
+        $this->db->simple_query("UPDATE nut_config SET FechaProxEntrega='".$fecha."' WHERE idConfig='1'");
     }
 
     public function setCierrePedidos($fecha)  {
-        $this->db->simple_query("UPDATE NUT_CONFIG SET FechaCierrePedidos='".$fecha."' WHERE idConfig='1'");
+        $this->db->simple_query("UPDATE nut_config SET FechaCierrePedidos='".$fecha."' WHERE idConfig='1'");
     }
     
 }

@@ -31,9 +31,6 @@
                 </div>
             </div>
         </div>
-
-
-
         <!-- carrito -->
         <div class="col-md-4" id="divCarrito">
             <div class="row carrito">
@@ -65,51 +62,10 @@
                         </table>
                     </div>
                 </div>
-                <div class="row">
-
-                    <?php if ($this->session->userdata('username') == null) { ?>
-                        <div class="col-md-8"> 
-                            <?php echo form_open('listado_productos/login', 'role="form"'); ?> 
-                            <?php if ($this->session->flashdata('error') != null) { ?>
-                                <div class="col-xs-8">
-                                    <?php echo $this->session->flashdata('error'); ?>
-                                </div>
-                            <?php } ?>                        
-                            <label class="col-xs-4 col-md-4 control-label">Email</label>
-                            <div class="col-xs-8">
-                                <input type="email" class="form-control" name="email" id="correo" required />
-                            </div>
-                            <label class="col-xs-4 col-md-4 control-label">Pass</label>
-                            <div class="col-xs-8">
-                                <input type="password" class="form-control" name="contrasena" id="correo" required />
-                            </div>
-                            <div class="col-xs-8">
-                                <input type="submit" class="form-control" value="Enviar"/>
-                            </div>
-                            </form>
-                        </div>
-                        <div class="col-md-4"> 
-                            <a href="<?= $login_url ?>" class="btn btn-sm btn-primary btn-block" role="button">FB</a>
-                        </div>                     
-                    <?php } else { ?>
-
-                        <div class="col-md-8"> 
-                            <b><?= $this->session->userdata('username') ?></b>                        
-                            <a href="<?= base_url_control(); ?>listado_productos/logout" class="btn btn-sm btn-primary btn-block" role="button">Logout</a>  
-                        </div>
-
-                    <?php } ?>
-
-                    <!--    <div class="col-md-4">
-                    <?php if (@$user_profile): ?>
-                                                <b><?= $user_profile['name'] ?></b>                        
-                                                <a href="<?= $logout_url ?>" class="btn btn-sm btn-primary btn-block" role="button">Logout</a>                         
-                    <?php else: ?>
-                                                <a href="<?= $login_url ?>" class="btn btn-sm btn-primary btn-block" role="button">FB</a>
-                    <?php endif; ?>
-                        </div>-->
-
-                </div>
+               <!-- copiado a nt -->
+               <?php $data["redirUrl"]="listado_productos/listado_productos"; ?>
+               <?php $this->view('includes/login',$data); ?>
+               <!-- fin -->
                 <hr>
                 <?php echo validation_errors(); ?>
                 <?php echo form_open('listado_productos/listado_productos', 'role="form"'); ?>
@@ -200,12 +156,8 @@
                 </div>
                 </form> 
             </div>
-
         </div>
-
     </div>
-
-
     <script>
         var url = '<?= base_url_control() ?>/carrito/agregar_producto';
         var delay = (function () {

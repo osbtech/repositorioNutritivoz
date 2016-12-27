@@ -83,8 +83,10 @@ class Administrador extends CI_Controller {
         $this->form_validation->set_rules('zona', 'Zona', 'required');
 
         if ($this->form_validation->run() === FALSE) {
-            $data['categorias'] = $this->productos_model->get_productosByCategoria();
-            $data['pedido'] = $this->pedidos_model->getPedidos($idPedido);
+            $data['pedido'] = $this->pedidos_model->getPedidos($idPedido);   
+            $data['categorias'] = $this->productos_model->get_productosByCategoria($data['pedido']['idZona']);
+            $data['localidades'] = $this->zona_model->get_localidadesByZona($data['pedido']['idZona']);
+
             $detalles = $this->pedidos_model->getDetallePedidos($idPedido);
             $this->cargar_carrito($detalles);
             $this->load->view('includes/head');
@@ -93,7 +95,7 @@ class Administrador extends CI_Controller {
             $this->load->view('includes/footer');
         } else {
             $idPedido = $this->input->post('idPedido');
-            $this->pedidos_model->actualizar_pedido($idPedido, $this->input->post('zona'), $this->input->post('direccion'), $this->input->post('aclDireccion'), '', $this->input->post('notas'), $this->cart->total(), calcularCostoEnvio($this->cart->total()), $this->cart->total() + calcularCostoEnvio($this->cart->total()), $this->input->post('esquina1'), $this->input->post('esquina2'));
+            $this->pedidos_model->actualizar_pedido($idPedido, $this->input->post('direccion'), $this->input->post('aclDireccion'), '', $this->input->post('notas'), $this->cart->total(), calcularCostoEnvio($this->cart->total()), $this->cart->total() + calcularCostoEnvio($this->cart->total()), $this->input->post('esquina1'), $this->input->post('esquina2'));
             $pedido = $this->pedidos_model->getPedidos($idPedido);
             $this->clientes_model->actualizar_cliente($pedido['correo'], $this->input->post('nombre'), $this->input->post('celular'));
             $this->pedidos_model->borrar_pedido_detalles($idPedido);
@@ -216,7 +218,7 @@ class Administrador extends CI_Controller {
                 $this->pedidos_model->guardarDetallePedido($idPedido, $idProducto[$x], $cantidad[$x], $precio[$x], $cantidadEntregada[$x], $cantidadProveedor[$x]);
             }
             $total = $subtotal + $this->input->post('costo_envio');
-            $this->pedidos_model->actualizar_pedidoAdm($idPedido, $this->input->post('idCliente'), $this->input->post('fecha_realizacion'), $this->input->post('fecha_entrega_estimada'), $this->input->post('fecha_entrega'), $this->input->post('zona'), $this->input->post('direccion'), $this->input->post('direccion_aclaracion'), $this->input->post('nota_cliente'), $subtotal, $this->input->post('costo_envio'), $total, $this->input->post('esquina1'), $this->input->post('esquina2'), $this->input->post('estado'), $this->input->post('nota_postventa'));
+            $this->pedidos_model->actualizar_pedidoAdm($idPedido, $this->input->post('idCliente'), $this->input->post('fecha_realizacion'), $this->input->post('fecha_entrega_estimada'), $this->input->post('fecha_entrega'), $this->input->post('direccion'), $this->input->post('direccion_aclaracion'), $this->input->post('nota_cliente'), $subtotal, $this->input->post('costo_envio'), $total, $this->input->post('esquina1'), $this->input->post('esquina2'), $this->input->post('estado'), $this->input->post('nota_postventa'));
 
             redirect('/administrador/listado_pedidos');
         }

@@ -141,7 +141,7 @@ CREATE TABLE `nut_proveedores` (
 insert  into `nut_proveedores`(`idProveedor`,`nombre`) values (1,'34 Sur'),(2,'Feral'),(3,'Graneco'),(4,'Prana'),(5,'La Trinidad'),(6,'Nutritívoz');
 
 /*Agregado en la versio 5.0*/
-CREATE TABLE `nutrutivozosb`.`nut_Zona`(  
+CREATE TABLE `nutrutivozosb`.`nut_zona`(  
   `idZona` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(50) NOT NULL,
   `fechaProxEntrega` DATETIME NOT NULL,
