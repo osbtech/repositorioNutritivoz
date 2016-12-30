@@ -6,7 +6,7 @@
 
         <div class="col-md-8">
             <div class="center">
-                <div class="pricelist-box">
+                <div class="pricelist-box" id="plb">
                     <?php
                     foreach ($categorias as $categoria) {
                         ?>
@@ -196,6 +196,7 @@
 
                     var result = jQuery.parseJSON(data);
                     dibujarResumenCarro(result.carro, result.envio, result.total);
+                    $('#divCarrito').css("margin-top", headerHeight).css("display", "block");
                 }
             });
         };
@@ -250,7 +251,8 @@
             $(this).bootstrapNumber($(this).attr("data-idProducto"));
         });
 
-
+        var headerHeight = $('#inicio')[0].clientHeight + $('#plb')[0].offsetTop;
+        
         obtenerCarrito();
         agregarCambio();
 
@@ -258,47 +260,39 @@
         var indice = 1;
         $(window).on("scroll", function () {
 
-            var headerHeight = $('#inicio')[0].clientHeight;
             var carritoHeight = $("#divCarrito")[0].clientHeight;
-            var carritoTop = $("#divCarrito")[0].offsetTop;
             var footerHeight = $('footer')[0].clientHeight;
 
             var st = $(this).scrollTop();
+            var delta = lastScrollTop - st;
+            var carritoTop = parseInt($("#divCarrito").css("margin-top"));
+
             if (st > lastScrollTop) {
                 // downscroll code
-                indice = 1;
 
-                if (document.body.scrollHeight - document.body.scrollTop <= window.innerHeight + 50) {
-                    $("#divCarrito").css("margin-top", window.innerHeight - carritoHeight - footerHeight - 30);
-                    $("#divCarrito").css("position", "fixed");
-                }
-                //else if(carritoHeight - document.body.scrollTop < 450) {
-                else if (Math.abs(window.innerHeight - carritoHeight - headerHeight) < document.body.scrollTop) {
-                    $("#divCarrito").css("margin-top", window.innerHeight - carritoHeight - 10); //inicial -400
-                    $("#divCarrito").css("position", "fixed");
-
+                if (st < headerHeight || carritoTop + carritoHeight > window.innerHeight) {
+                    $("#divCarrito").css("margin-top", carritoTop + delta);
                 } else {
-                    $("#divCarrito").css("margin-top", headerHeight + 30);
-                    $("#divCarrito").css("position", "absolute");
-                    //                indice = indice + 30;
-                    //                var a = carritoHeight - 10;
-                    //                $("#divCarrito").css("margin-top", a + indice);
-                    //                $("#divCarrito").css("position", "fixed");
+                    if (st + window.innerHeight < document.body.scrollHeight - footerHeight) {
+                        $("#divCarrito").css("margin-top", window.innerHeight - carritoHeight - 10) ;
+                    } else {
+                        $("#divCarrito").css("margin-top", carritoTop + delta);
+                    }
+                    
                 }
+
             } else {
                 // upscroll code
 
-                if (document.body.scrollTop <= headerHeight) {
-                    $("#divCarrito").css("margin-top", headerHeight + 30);
-                    $("#divCarrito").css("position", "absolute");
-                } else if (carritoTop >= 0) {
-                    $("#divCarrito").css("margin-top", 10);
-                    $("#divCarrito").css("position", "fixed");
+                if (st <= headerHeight) {
+                    $("#divCarrito").css("margin-top", headerHeight - st);
                 } else {
-                    indice = indice + 30;
-                    var a = window.innerHeight - carritoHeight - 10;
-                    $("#divCarrito").css("margin-top", a + indice);
-                    $("#divCarrito").css("position", "fixed");
+                    if (carritoTop >= 0) {
+                        $("#divCarrito").css("margin-top", 10);
+                    } else {
+                        $("#divCarrito").css("margin-top", carritoTop + delta);
+                    }
+                    
                 }
 
 
@@ -311,16 +305,3 @@
 
     </script>
 
-    <style>
-        #divCarrito{
-            width: 25%;
-            float:right;
-            margin: 20px;
-            margin-top:270px;
-            float:right;
-            right:0;
-            top:0;
-            margin-right: 4%;
-            position: absolute;
-        }
-    </style>
