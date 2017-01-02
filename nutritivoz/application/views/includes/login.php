@@ -146,9 +146,9 @@
             success: function (data) {
                 var result = jQuery.parseJSON(data);
                 if(result.resultado){
-                    $("#msgCambio").text("po favor revisa el correo indicado para cambiar la contrasena.");
+                    $("#msgCambio").text("po favor revisa el correo indicado para cambiar la contraseña.");
                 }else{
-                    $("#msgCambio").text("No se encontro el correo indicado.");
+                    $("#msgCambio").text("No se encontró la dirección de correo.");
                 }
             }
         });

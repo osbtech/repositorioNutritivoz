@@ -15,7 +15,6 @@ function base_url_control() {
 }
 
 function calcularCostoEnvio($total) {
-    return 0;
    if (isset($_SESSION['zona'])) {
    switch ($_SESSION['zona']) {
        case '1':
