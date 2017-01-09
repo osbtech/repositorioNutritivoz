@@ -4,7 +4,7 @@
     <body>
         <p>
             <?php if (isset($hash)) { ?>
-                ¡Muchas gracias por tu pedido! Por favor, revisa el detalle y haz <strong>clic en el botón de abajo para confirmarlo</strong>.
+                ¡Muchas gracias por tu pedido! Por favor, revisa el detalle y <strong>haz clic en el botón de abajo para confirmarlo</strong>.
             <?php } else { ?>
                 <?= $mensaje ?>
             <?php } ?>

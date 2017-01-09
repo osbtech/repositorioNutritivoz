@@ -106,7 +106,7 @@ class Listado_productos extends CI_Controller {
                 $carroItem['unidad'] = $producto['unidad'];
                 $carroItem['marca'] = $marca['nombre'];
                 $carroItem['cantidad'] = $items['qty'];
-                $carroItem['precio'] = $items['price'];
+                $carroItem['precio'] = $items['price'] * $items['qty'];
                 $carroItem['nombre'] = $items['name'];
                 $datosEmail['items'][] = $carroItem;
             }

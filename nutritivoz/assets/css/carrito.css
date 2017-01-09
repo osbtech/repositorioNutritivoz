@@ -51,11 +51,11 @@ div.posicionadorVertical {
 }
 
 #divCarrito button, #divCarrito input, #divCarrito select, #divCarrito textarea {
-    margin:5px !important;
+    margin:5px;
 }
 
 #divCarrito input{
-    font-size: 15px !important;
+    font-size: 15px;
 }
 
 #divCarrito .cant{
@@ -67,11 +67,54 @@ div.posicionadorVertical {
     margin-top: 10px;
 }
 
+#divLogin {
+    padding-left: .9375rem;
+    padding-right: .9375rem;
+    padding-bottom: 1rem;
+}
+
+#divLogin a {
+    color: #b3a633;
+}
+
+#divLogin a:hover {
+    text-decoration: underline;
+}
+
+#btnLogin {
+    display:inline;
+    margin: 0px !important;
+    background-color: #fff;
+    color: #b3a633;
+    font-size: 1rem !important;
+}
+
+#btnLogin:hover {
+    text-decoration: underline;
+}
+
+.modalForm {
+    line-height: 40px;
+} 
+
+
+.errorMessage {
+    color: #fa973c;
+}
+
+.errorMessage > p {
+    color: #fa973c !important;
+}
 
 .boton-confirmar {
     background-color: #b3a633;
     color: #fff;
 }
+
+.boton-confirmar:hover {
+    background-color: #857916;
+}
+
 
 .tdRight{
     text-align: right;

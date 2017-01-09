@@ -65,9 +65,10 @@
                     </div>
                 <!-- copiado a nt -->
                 <?php $data["redirUrl"]="listado_productos/listado_productos"; ?>
-                <?php $this->view('includes/login',$data); ?>
+
                 <!-- fin -->
-                    <hr>
+                    <hr id="hrDatos">
+                    <?php $this->view('includes/login',$data); ?>
                     <?php echo validation_errors(); ?>
                     <?php echo form_open('listado_productos/listado_productos', 'role="form"'); ?>
                     <!--campos a ingresar -->
@@ -249,9 +250,11 @@
             if (total == 0) {
                 $('#btnEnviarPedido').attr('disabled', 'disabled');
                 $('#rowTotal').css('display', 'none');
+                $('#hrDatos').css('display', 'none');
             } else {
                 $('#btnEnviarPedido').removeAttr('disabled');
                 $('#rowTotal').css('display', '');
+                $('#hrDatos').css('display', '');
             }
             agregarCambio();
         };
@@ -279,7 +282,9 @@
             if (st > lastScrollTop) {
                 // downscroll code
 
-                if (st > headerHeight && headerHeight + carritoTop + carritoHeight <= st + window.innerHeight - delta ) {
+                if (carritoHeight < window.innerHeight && st > headerHeight && headerHeight + carritoTop <= st + 30 ) {
+                    $("#divCarrito").css("margin-top", st-headerHeight+30);
+                } else if (st > headerHeight && headerHeight + carritoTop + carritoHeight <= st + window.innerHeight - delta ) {
                     $("#divCarrito").css("margin-top", st - headerHeight + window.innerHeight - carritoHeight);
                 }
 

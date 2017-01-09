@@ -48,21 +48,19 @@
 ?>
 
     <div class="row">
-        <?php if ($this->session->userdata('username') == null) { ?>
-            <div class="col-xs-8">
-                <input type='button' id="btnLogin" name='basic' value='login' class='basic'/>
-            </div>
+        <div id="divLogin">
+            <?php if ($this->session->userdata('username') == null) { ?>
+                Puede <input type='button' id="btnLogin" name='basic' value='ingresar con su usuario' class='basic'/> o realizar la compra indicando sus datos debajo.
                 <?php if ($this->session->flashdata('error') != null) { ?>
                     <div class="col-xs-8">
                         <?php echo $this->session->flashdata('error'); ?>
                     </div>
                 <?php } ?>      
-        <?php } else { ?>
-                <div class="col-md-8"> 
-                    <b><?= $this->session->userdata('username') ?></b>                        
-                    <a href="<?= base_url_control(); ?>login/logout" class="btn btn-sm btn-primary btn-block" role="button">Logout</a>  
-                </div>
-        <?php } ?>
+            <?php } else { ?>
+                Se encuentra logueado al sistema. Puede modificar los datos para el envío. 
+                <a href="<?= base_url_control(); ?>login/logout" >Salir</a>  
+            <?php } ?>
+        </div>
         
         <?php if (@$user_profile): ?>
             <div class="col-xs-8">
@@ -78,55 +76,84 @@
 
     <!-- modal content para login-->
     <div id="basic-modal-content">
-         <div class="row">
-            <form id="loginForm">                
-                <div class="col-xs-8">
-                    <span id="msgError" ></span>
-                </div>                                      
-                <label class="col-xs-4 col-md-4 control-label">Email</label>
-                <div class="col-xs-8">
+         <div class="row"> 
+            <div class="col-xs-10" >
+                <h2 style="line-height:60px" id="tituloModal">Ingresar</h2>
+            </div>
+        </div>
+        
+        <form id="loginForm" class="modalForm">
+            <div class="row">
+                <div class="col-xs-12" style="margin-bottom:10px;">
+                    <span id="msgError" class="errorMessage"></span>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-xs-3 control-label">Correo</label>
+                <div class="col-xs-9">
                     <input type="email" class="form-control" name="correou" id="correou" required />
                 </div>
-                <label class="col-xs-4 col-md-4 control-label">Pass</label>
-                <div class="col-xs-8">
+            </div>
+            <div class="row">
+                <label class="col-xs-3 control-label">Contraseña</label>
+                <div class="col-xs-9">
                     <input type="password" class="form-control" name="contrasena" id="contrasena" required />                    
                 </div>
-                <div class="col-xs-8">
-                    <input type="submit" class="form-control" value="Enviar"/>
-                </div>
-            </form>
-            <div class="col-xs-8">
-            <a id="btnActivar" href="<?= site_url('login/cambiarContrasena') ?>" >Cambiar/recuperar contraseña</a>
             </div>
-            <?php if (!@$user_profile): ?>
-                <div class="col-xs-8">  
-                    <a href="<?= $login_url ?>" class="btn btn-sm btn-primary btn-block" role="button">FB</a>
+            <div class="row">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-5">
+                    <a id="btnActivar" href="<?= site_url('login/cambiarContrasena') ?>" >Recuperar contraseña</a>
                 </div>
-            <?php endif; ?>
-         </div>
+                <div class="col-xs-4">
+                    <input type="submit" class="form-control btn-lg boton-confirmar" value="Ingresar"/>
+                </div>
+            </div>
+        </form>
+        <?php if (!@$user_profile): ?>
+            <div class="row" style="margin-top:35px" id="loginFacebook">
+                <div class="col-xs-3">
+                    O puede
+                </div>
+                <div class="col-xs-9">      
+                    <a href="<?= $login_url ?>" class="btn btn-md btn-primary btn-block" role="button">Ingresar con Facebook</a>
+                </div>
+            </div>
+        <?php endif; ?>
          <br>
-         <div class="row" id="cambiarContrasena">
-            <form id="CambioForm">
-                <div class="col-xs-8">
-                    <span id="msgCambio"></span>
-                </div> 
-                <div class="col-xs-8"> 
-                    <label class="col-xs-4 col-md-4 control-label">Email</label>
+
+        <div class="row">
+            <div class="col-xs-12" style="margin-bottom:10px;">
+                <span id="msgCambio" class="errorMessage"></span>
+            </div>
+        </div>
+
+        <form id="CambioForm" class="modalForm">
+
+            <div class="row">
+                <label class="col-xs-3 control-label">Correo</label>
+                <div class="col-xs-9">
+                    <input type="email" class="form-control"  name="mailCambio" id="mailCambio" required />
                 </div>
-                <div class="col-xs-8"> 
-                    <input type="email" class="form-control" name="mailCambio" id="mailCambio" required />
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8"></div>
+                <div class="col-xs-4">
+                    <input type="submit" id="cambiarBtn" class="form-control btn-lg boton-confirmar" value="Recuperar"/>
                 </div>
-                <div class="col-xs-8">
-                    <input type="button" id="cambiarBtn" class="form-control" value="Enviar"/>
-                </div>
-            </form>
-         </div>
+            </div>
+        </form>
     </div>
     <script>
-    $("#cambiarContrasena").hide();
+    $("#CambioForm").hide();
 
     $('#btnActivar').click(function(){
-        $("#cambiarContrasena").show();
+        $('#loginForm').hide();
+        $('#loginFacebook').hide();
+        $('#tituloModal').text('Recuperar contraseña');
+        $("#CambioForm").show();
+        
         return false;
     });
 
@@ -146,7 +173,9 @@
             success: function (data) {
                 var result = jQuery.parseJSON(data);
                 if(result.resultado){
-                    $("#msgCambio").text("po favor revisa el correo indicado para cambiar la contraseña.");
+                    $("#msgCambio").text("Proceso iniciado. Revisa el correo para cambiar la contraseña.");
+                    $("#CambioForm").hide();
+                    
                 }else{
                     $("#msgCambio").text("No se encontró la dirección de correo.");
                 }
@@ -169,7 +198,7 @@
                 if(result.resultado){
                      location.reload();
                 }else{
-                    $("#msgError").text("Error en usuario o contraseña!");
+                    $("#msgError").text("Error en usuario o contraseña. Intente nuevamente.");
                 }
             }
         });   
